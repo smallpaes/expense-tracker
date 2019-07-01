@@ -1,0 +1,40 @@
+<div class="form-container">
+  <form action="/expenses/new" method="post" class="text-secondary">
+    <div class="row mb-4">
+      <div class="col-2">
+        <small>*必填欄位</small>
+      </div>
+      <div class="col-8">
+        <h4 class="text-center">請輸入你的支出</h4>
+      </div>
+    </div>
+    <div class="form-group row ml-1 mr-4">
+      <label for="name" class="col-2 col-form-label">名稱*</label>
+      <input type="text" name="name" id="name" class="col-10 form-control">
+    </div>
+    <div class="form-group row ml-1 mr-4">
+      <label for="date" class="col-2 col-form-label">日期*</label>
+      <input type="date" name="date" id="date" class="col-10 form-control">
+    </div>
+    <div class="form-group row ml-1 mr-4">
+      <label for="category" class="col-2 col-form-label">類別*</label>
+      <select name="category" id="category" class="col-10 form-control">
+        <option>家居物業</option>
+        <option>交通出行</option>
+        <option>休閒娛樂</option>
+        <option>餐飲食品</option>
+        <option>其他</option>
+      </select>
+    </div>
+    <div class="form-group row ml-1 mr-4">
+      <label for="amount" class="col-2 col-form-label">金額*</label>
+      <input type="number" name="amount" id="amount" class="col-10 form-control">
+    </div>
+    <div class="row ml-1 mr-4">
+      <div class="col-2"></div>
+      <div class="col-8 p-0 mt-2">
+        <input type="submit" value="新增支出" class="btn btn-info">
+      </div>
+    </div>
+  </form>
+</div>

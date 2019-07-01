@@ -3,7 +3,7 @@ const router = express.Router()
 
 // Create new expense page
 router.get('/new', (req, res) => {
-  res.send('new expense page')
+  res.render('new', { newCSS: true })
 })
 
 // Create new expanse submit
