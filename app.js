@@ -3,6 +3,7 @@ const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
 const exphbs = require('express-handlebars')
+const bodyParser = require('body-parser')
 
 // Set up express-handlebars
 app.engine('handlebars', exphbs({ default: 'main' }))
@@ -36,6 +37,9 @@ db.once('open', () => {
 // Include Models
 const User = require('./models/user')
 const Record = require('./models/record')
+
+// add middle-parser middleware
+app.use(bodyParser.urlencoded({ extended: true }))
 
 // serve static files
 app.use(express.static('public'))
