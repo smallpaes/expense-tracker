@@ -37,6 +37,9 @@ db.once('open', () => {
 const User = require('./models/user')
 const Record = require('./models/record')
 
+// serve static files
+app.use(express.static('public'))
+
 // home route
 app.use('/', homeRoutes)
 
