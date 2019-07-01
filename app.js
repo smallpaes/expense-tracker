@@ -2,6 +2,11 @@
 const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
+const exphbs = require('express-handlebars')
+
+// Set up express-handlebars
+app.engine('handlebars', exphbs({ default: 'main' }))
+app.set('view engine', 'handlebars')
 
 // Include routers
 const homeRoutes = require('./routes/home')
