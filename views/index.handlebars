@@ -1,1 +1,64 @@
-<h1>Index page</h1>
+<section class="container mt-4 border">
+  <!--Filter Panel-->
+  <div class="row">
+    <div class="col-8 border">
+      <form action="/search" method="post">
+        <div class="form-row">
+          <!--Month Filter-->
+          <div class="dropdown col-6">
+            <a href="#" class="btn btn-secondary dropdown-toggle btn-block" role="button" id="monthDropdown"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              月份
+            </a>
+            <div class="dropdown-menu" aria-labelledby="monthDropdown">
+              <input type="submit" value="七月份" class="dropdown-item" name="month">
+              <input type="submit" value="六月份" class="dropdown-item" name="month">
+              <input type="submit" value="六月份" class="dropdown-item" name="month">
+            </div>
+          </div>
+          <!--Category Filter-->
+          <div class="dropdown col-6">
+            <a href="#" class="btn btn-secondary dropdown-toggle btn-block" role="button" id="categoryDropdown"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              類別
+            </a>
+            <div class="dropdown-menu" aria-labelledby="categoryDropdown">
+              <input type="submit" value="家居物業" class="dropdown-item" name="category">
+              <input type="submit" value="交通出行" class="dropdown-item" name="category">
+              <input type="submit" value="休閒娛樂" class="dropdown-item" name="category">
+              <input type="submit" value="餐飲食品" class="dropdown-item" name="category">
+              <input type="submit" value="其他" class="dropdown-item" name="category">
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!--Total Expense Display-->
+  <div class="row">
+    <div class="col-8 border position-relative">
+      <h5>總金額：</h5>
+      <h1 class="display-4 text-right">25260</h1>
+    </div>
+  </div>
+  <!--Expense Detail Display-->
+  <div class="row">
+    <ul class="list-group p-0 w-100">
+      <li class="list-group-item d-flex py-2 px-0">
+        <div class="col-8 border d-flex align-items-center">
+          <h1 class="d-inline-block border m-0 text-info"><i class="fas fa-home"></i></h1>
+          <div class="flex-grow-1 ml-2 text-secondary">
+            <h4 class="m-0 pb-1">租金</h4>
+            <small class="d-block">2019/04/01</small>
+          </div>
+          <h5 class="d-inline-block m-0 text-secondary">72</h5>
+        </div>
+        <div class="col-4 border d-flex justify-content-end align-items-center">
+          <a href="/expenses/edit/id" class="btn btn-info">修改</a>
+          <a href="/expenses/edit/id" class="btn btn-danger ml-2">刪除</a>
+        </div>
+      </li>
+
+    </ul>
+  </div>
+</section>
