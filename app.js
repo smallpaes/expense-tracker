@@ -3,6 +3,11 @@ const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
 
+// Include routers
+const homeRoutes = require('./routes/home')
+const expenseRoutes = require('./routes/expense')
+const userRoutes = require('./routes/user')
+
 // Set up server related variable
 const port = 3000
 
@@ -18,7 +23,7 @@ db.on('error', () => {
   console.log('mongodb error!')
 })
 
-// connection seccess
+// connection success
 db.once('open', () => {
   console.log('mongodb connected!')
 })
@@ -27,8 +32,18 @@ db.once('open', () => {
 const User = require('./models/user')
 const Record = require('./models/record')
 
-app.get('/', (req, res) => {
-  res.send('landing page')
+// home route
+app.use('/', homeRoutes)
+
+// expense routes
+app.use('/expenses', expenseRoutes)
+
+// user routes
+app.use('/users', userRoutes)
+
+// error page
+app.use((req, res) => {
+  res.send('page not found')
 })
 
 // Start and listen to server
