@@ -4,6 +4,7 @@ const app = express()
 const mongoose = require('mongoose')
 const exphbs = require('express-handlebars')
 const bodyParser = require('body-parser')
+const handlebarHelpers = require('./handlebars-helpers')
 
 // Set up express-handlebars
 app.engine('handlebars', exphbs({ default: 'main' }))

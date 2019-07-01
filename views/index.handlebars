@@ -44,21 +44,22 @@
   <!--Expense Detail Display-->
   <div class="row">
     <ul class="list-group p-0 w-100">
+      {{#each records}}
       <li class="list-group-item d-flex py-2 px-0">
         <div class="col-8 border d-flex align-items-center">
-          <h1 class="d-inline-block border m-0 text-info"><i class="fas fa-home"></i></h1>
+          <h1 class="d-inline-block border m-0 text-info">{{#getIcon this.category}}{{/getIcon}}</h1>
           <div class="flex-grow-1 ml-2 text-secondary">
-            <h4 class="m-0 pb-1">租金</h4>
-            <small class="d-block">2019/04/01</small>
+            <h4 class="m-0 pb-1">{{this.name}}</h4>
+            <small class="d-block">{{this.date}}</small>
           </div>
-          <h5 class="d-inline-block m-0 text-secondary">72</h5>
+          <h5 class="d-inline-block m-0 text-secondary">{{this.amount}}</h5>
         </div>
         <div class="col-4 border d-flex justify-content-end align-items-center">
           <a href="/expenses/edit/id" class="btn btn-info">修改</a>
           <a href="/expenses/edit/id" class="btn btn-danger ml-2">刪除</a>
         </div>
       </li>
-
+      {{/each}}
     </ul>
   </div>
 </section>
