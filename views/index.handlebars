@@ -58,10 +58,14 @@
             </div>
             <h5 class="d-inline-block m-0 text-secondary">{{this.amount}}</h5>
           </div>
-          <div class="col-4 d-flex justify-content-end align-items-center py-2 rounded">
-            <a href="/expenses/edit/{{this._id}}" class="btn btn-edit">修改</a>
-            <button class="btn btn-delete ml-2" type="button" data-toggle="modal" data-target="#a{{this.id}}">
-              刪除
+          <div class="col-4 d-flex justify-content-center align-items-center py-2 rounded">
+            <a href="/expenses/edit/{{this._id}}" class="btn btn-edit py-2">
+              <i class="fas fa-edit"></i>
+              <span class="d-none d-sm-inline-block pl-1">修改</span>
+            </a>
+            <button class="btn btn-delete ml-2 py-2" type="button" data-toggle="modal" data-target="#a{{this.id}}">
+              <i class="fas fa-trash-alt"></i>
+              <span class="pl-1 d-none d-sm-inline-block">刪除</span>
             </button>
             <!--Delete Modal-->
             <div class="modal fade" id="a{{this.id}}" tabindex="-1" role="dialog" aria-labelledby="Delete Message Modal"

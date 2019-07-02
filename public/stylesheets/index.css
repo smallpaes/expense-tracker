@@ -57,6 +57,13 @@ section.display-panel {
   background:#E8E8E8;
 }
 
+.expense-display ul li .col-8 i {
+  display: inline-block;
+  text-align: center;
+  width: 50px;
+  opacity: .9;
+}
+
 .expense-display ul li .col-4 {
   background: RGBA(248,248,248,.8);
 }
@@ -77,13 +84,6 @@ section.display-panel {
 
 .expense-display ul li .col-4 .btn-delete:hover {
   background: #C3073F;
-}
-
-i {
-  display: inline-block;
-  text-align: center;
-  width: 50px;
-  opacity: .9;
 }
 
 /*Add new expense button*/
