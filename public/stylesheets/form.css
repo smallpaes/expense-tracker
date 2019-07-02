@@ -1,5 +1,7 @@
 .form-container {
   max-width: 500px;
   margin: 50px auto;
+  background: #5D5C61;
+  border-radius: 5px; 
   
 }

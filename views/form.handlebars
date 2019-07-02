@@ -1,12 +1,12 @@
-<div class="form-container">
+<div class="form-container position-relative py-3 shadow">
   <form action="{{#if record}}/expenses/edit/{{record._id}}?_method=PUT{{else}}/expenses/new{{/if}}" method="post"
-    class="text-secondary">
+    class="text-white">
     <div class="row mb-4">
-      <div class="col-2">
+      <div class="col-2 ml-2">
         <small class="text-danger">*必填欄位</small>
       </div>
       <div class="col-8">
-        <h4 class="text-center">請輸入你的支出</h4>
+        <h4 class="text-center text-white">請輸入你的支出</h4>
       </div>
     </div>
     <div class="form-group row ml-1 mr-4">
@@ -34,11 +34,11 @@
     </div>
     <div class="row ml-1 mr-4">
       <div class="col-2"></div>
-      <div class="col-8 p-0 mt-2">
+      <div class="col-10 p-0 mt-1">
         {{#if record}}
-        <input type="submit" value="送出" class="btn btn-info">
+        <input type="submit" value="送出" class="btn btn-info btn-block">
         {{else}}
-        <input type="submit" value="新增支出" class="btn btn-info">
+        <input type="submit" value="新增支出" class="btn btn-info btn-block">
         {{/if}}
       </div>
     </div>
