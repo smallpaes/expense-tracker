@@ -1,7 +1,18 @@
 .form-container {
-  max-width: 500px;
+  max-width: 480px;
   margin: 50px auto;
   background: #5D5C61;
   border-radius: 5px; 
-  
+  padding: 10px;
+}
+
+.form-container form {
+  padding: 25px 5px;
+  background: #D0D0D0;
+  color: #5D5C61;
+}
+
+div.valid-feedback,
+div.invalid-feedback {
+  padding-left: 74px;
 }

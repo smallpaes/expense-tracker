@@ -5,7 +5,7 @@ const Record = require('../models/record')
 
 // Create new expense page
 router.get('/new', (req, res) => {
-  res.render('form', { formCSS: true })
+  res.render('form', { formCSS: true, formValidateJS: true })
 })
 
 // Create new expanse submit
@@ -35,7 +35,7 @@ router.get('/edit/:id', (req, res) => {
   // find the document based on id 
   Record.findById(req.params.id)
     .then(record => {
-      res.render('form', { formCSS: true, record })
+      res.render('form', { formCSS: true, record, formValidateJS: true })
     })
     .catch(err => console.log(err))
 
