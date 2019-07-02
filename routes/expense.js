@@ -48,7 +48,6 @@ router.put('/edit/:id', (req, res) => {
   // find the document based on id
   Record.findById(req.params.id)
     .then(record => {
-      console.log(record)
       // update document info based on form input
       record.name = name
       record.date = date
