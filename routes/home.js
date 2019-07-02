@@ -17,7 +17,7 @@ router.get('/', (req, res) => {
         if (months.includes(record.date.slice(0, 7))) { return }
         months.push(record.date.slice(0, 7))
       })
-      console.log(months)
+      console.log(records)
       res.render('index', { indexCSS: true, records, totalAmount, months })
     })
 })

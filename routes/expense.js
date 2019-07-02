@@ -64,7 +64,15 @@ router.put('/edit/:id', (req, res) => {
 
 // Delete expense 
 router.delete('/delete/:id', (req, res) => {
-  res.send('delete expense')
+  // find the document based on id
+  Record.findById(req.params.id)
+    .then(record => {
+      record.remove((err, record) => {
+        if (err) return console.log(err)
+        res.redirect('/')
+      })
+    })
+    .catch(err => console.log(err))
 })
 
 

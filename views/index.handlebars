@@ -60,7 +60,33 @@
           </div>
           <div class="col-4 d-flex justify-content-end align-items-center py-2 rounded">
             <a href="/expenses/edit/{{this._id}}" class="btn btn-edit">修改</a>
-            <a href="/expenses/delete/{{this.id}}" class="btn btn-delete ml-2">刪除</a>
+            <button class="btn btn-delete ml-2" type="button" data-toggle="modal" data-target="#a{{this.id}}">
+              刪除
+            </button>
+            <!--Delete Modal-->
+            <div class="modal fade" id="a{{this.id}}" tabindex="-1" role="dialog" aria-labelledby="Delete Message Modal"
+              aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title text-secondary font-weight-bold"><i
+                        class="fas fa-exclamation-triangle"></i>注意</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body text-secondary">
+                    你確定要刪除「<span class="font-weight-bold">{{this.date}} {{this.name}}</span> 」這筆紀錄嗎？
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                    <form action="/expenses/delete/{{this.id}}?_method=DELETE" method="post">
+                      <input type="submit" value="刪除" class="btn btn-danger">
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </li>
         {{/each}}
