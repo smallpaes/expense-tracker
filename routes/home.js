@@ -5,11 +5,21 @@ const User = require('../models/user')
 
 router.get('/', (req, res) => {
   // retrieve all expense from record collection
-  Record.find()
-    .then(records => {
-      res.render('index', { indexCSS: true, records })
+  Record.find({})
+    .sort({ date: 'desc' })
+    .exec((err, records) => {
+      if (err) return console.log(err)
+      // find total expense
+      const totalAmount = records.reduce((acc, cur) => acc + cur.amount, 0)
+      // find total month
+      const months = []
+      records.forEach(record => {
+        if (months.includes(record.date.slice(0, 7))) { return }
+        months.push(record.date.slice(0, 7))
+      })
+      console.log(months)
+      res.render('index', { indexCSS: true, records, totalAmount, months })
     })
-    .catch(err => console.log(err))
 })
 
 module.exports = router

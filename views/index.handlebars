@@ -2,22 +2,24 @@
   <!--Filter Panel-->
   <div class="row mx-2">
     <div class="col-8 px-0">
-      <form action="/search" method="post">
+      <form action="/search">
         <div class="form-row">
           <!--Month Filter-->
           <div class="dropdown col-6">
+            <input value="{{selectedMonth}}" type="hidden" name="defaultMonth">
             <a href="#" class="btn filter-btn dropdown-toggle btn-block rounded-0 shadow font-weight-bold "
               role="button" id="monthDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               月份
             </a>
             <div class="dropdown-menu" aria-labelledby="monthDropdown">
-              <input type="submit" value="七月份" class="dropdown-item text-secondary" name="month">
-              <input type="submit" value="六月份" class="dropdown-item text-secondary" name="month">
-              <input type="submit" value="六月份" class="dropdown-item text-secondary" name="month">
+              {{#each months}}
+              <input type="submit" value="{{this}}" class="dropdown-item text-secondary" name="month">
+              {{/each}}
             </div>
           </div>
           <!--Category Filter-->
           <div class="dropdown col-6">
+            <input value="{{selectedCategory}}" type="hidden" name="defaultCategory">
             <a href="#" class="btn filter-btn dropdown-toggle btn-block rounded-0 shadow font-weight-bold "
               role="button" id="categoryDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               類別
@@ -40,7 +42,7 @@
     <div class="row mx-2 py-2">
       <div class="col-8 rounded position-relative pt-2 amount-display">
         <h4 class="pt-1">總金額：</h4>
-        <h1 class="text-right amount">25260</h1>
+        <h1 class="text-right amount">{{totalAmount}}</h1>
       </div>
     </div>
     <!--Expense Detail Display-->
