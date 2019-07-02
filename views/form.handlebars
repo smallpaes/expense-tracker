@@ -1,5 +1,6 @@
 <div class="form-container">
-  <form action="/expenses/new" method="post" class="text-secondary">
+  <form action="{{#if record}}/expenses/edit/{{record._id}}?_method=PUT{{else}}/expenses/new{{/if}}" method="post"
+    class="text-secondary">
     <div class="row mb-4">
       <div class="col-2">
         <small class="text-danger">*必填欄位</small>
@@ -10,31 +11,35 @@
     </div>
     <div class="form-group row ml-1 mr-4">
       <label for="name" class="col-2 col-form-label">名稱*</label>
-      <input type="text" name="name" id="name" class="col-10 form-control">
+      <input type="text" name="name" id="name" class="col-10 form-control" value="{{record.name}}">
     </div>
     <div class="form-group row ml-1 mr-4">
       <label for="date" class="col-2 col-form-label">日期*</label>
-      <input type="date" name="date" id="date" class="col-10 form-control">
+      <input type="date" name="date" id="date" class="col-10 form-control" value="{{record.date}}">
     </div>
     <div class="form-group row ml-1 mr-4">
       <label for="category" class="col-2 col-form-label">類別*</label>
       <select name="category" id="category" class="col-10 form-control text-secondary">
         <option selected>類別選擇</option>
-        <option value="家居物業">家居物業</option>
-        <option value="交通出行">交通出行</option>
-        <option value="休閒娛樂">休閒娛樂</option>
-        <option value="餐飲食品">餐飲食品</option>
-        <option value="其他12">其他</option>
+        <option value="家居物業" {{isSelected record.category "家居物業"}}>家居物業</option>
+        <option value="交通出行" {{isSelected record.category "交通出行"}}>交通出行</option>
+        <option value="休閒娛樂" {{isSelected record.category "休閒娛樂"}}>休閒娛樂</option>
+        <option value="餐飲食品" {{isSelected record.category "餐飲食品"}}>餐飲食品</option>
+        <option value="其他12" {{isSelected record.category "其他"}}>其他</option>
       </select>
     </div>
     <div class="form-group row ml-1 mr-4">
       <label for="amount" class="col-2 col-form-label">金額*</label>
-      <input type="number" name="amount" id="amount" class="col-10 form-control">
+      <input type="number" name="amount" id="amount" class="col-10 form-control" value="{{record.amount}}">
     </div>
     <div class="row ml-1 mr-4">
       <div class="col-2"></div>
       <div class="col-8 p-0 mt-2">
+        {{#if record}}
+        <input type="submit" value="送出" class="btn btn-info">
+        {{else}}
         <input type="submit" value="新增支出" class="btn btn-info">
+        {{/if}}
       </div>
     </div>
   </form>

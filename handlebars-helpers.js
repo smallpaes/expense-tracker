@@ -7,3 +7,7 @@ Handlebars.registerHelper('getIcon', function (category, options) {
         : category === '餐飲食品' ? `<i class="fas fa-utensils"></i>`
           : `<i class="fas fa-pen"></i>`
 })
+
+Handlebars.registerHelper('isSelected', function (selectedOption, thisOption, options) {
+  return (selectedOption === thisOption) ? 'selected' : ''
+})

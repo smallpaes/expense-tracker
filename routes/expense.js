@@ -32,12 +32,35 @@ router.post('/new', (req, res) => {
 
 // Edit expense page
 router.get('/edit/:id', (req, res) => {
-  res.send('edit expense page')
+  // find the document based on id 
+  Record.findById(req.params.id)
+    .then(record => {
+      res.render('form', { formCSS: true, record })
+    })
+    .catch(err => console.log(err))
+
 })
 
 // Edit expense submit
-router.post('/edit/:id', (req, res) => {
-  res.send('submit edited expense page')
+router.put('/edit/:id', (req, res) => {
+  // get all data from data input
+  const { name, date, category, amount } = req.body
+  // find the document based on id
+  Record.findById(req.params.id)
+    .then(record => {
+      console.log(record)
+      // update document info based on form input
+      record.name = name
+      record.date = date
+      record.category = category
+      record.amount = amount
+
+      // save the document to database
+      record.save()
+        .then(record => res.redirect('/'))
+        .catch(err => console.log(err))
+    })
+    .catch(err => console.log(err))
 })
 
 // Delete expense 

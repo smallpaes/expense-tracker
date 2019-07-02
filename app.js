@@ -5,6 +5,7 @@ const mongoose = require('mongoose')
 const exphbs = require('express-handlebars')
 const bodyParser = require('body-parser')
 const handlebarHelpers = require('./handlebars-helpers')
+const methodOverride = require('method-override')
 
 // Set up express-handlebars
 app.engine('handlebars', exphbs({ default: 'main' }))
@@ -42,6 +43,9 @@ const Record = require('./models/record')
 
 // add middle-parser middleware
 app.use(bodyParser.urlencoded({ extended: true }))
+
+// use method-override to override using a query value
+app.use(methodOverride('_method'))
 
 // serve static files
 app.use(express.static('public'))
