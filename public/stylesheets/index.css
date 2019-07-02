@@ -1,0 +1,97 @@
+.expense-container {
+  max-width: 700px;
+  margin: 50px auto;
+}
+
+/*Filter Panel-*/
+.filter-btn {
+  background: #5D5C61;
+  color: white;
+}
+
+.filter-btn:hover {
+  background: #535257;
+  color: white;
+}
+
+/*Display Panel*/
+section.display-panel {
+  background: #5D5C61;
+  border-radius: 5px; 
+  margin-top: 20px;
+}
+
+/*Total Expense Display*/
+.amount-display {
+  background: #D0D0D0;
+  color: #5D5C61;
+  min-height: 127px;
+}
+
+.amount-display .amount {
+  position: absolute;
+  letter-spacing: 4px;
+  top: 20px;
+  right: 10px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 5em;
+}
+
+/*Expense Detail Display*/
+.expense-display ul {
+  height: 340px;
+  overflow-y: scroll;
+}
+
+.expense-display ul li:first-of-type {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.expense-display ul li:last-of-type {
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+.expense-display ul li:nth-of-type(2n+1) .col-8 {
+  background:#E8E8E8;
+}
+
+.expense-display ul li .col-4 {
+  background: RGBA(248,248,248,.8);
+}
+
+.expense-display ul li .col-4 .btn-edit {
+  background: #9D8D8F;
+  color: white;
+}
+
+.expense-display ul li .col-4 .btn-edit:hover {
+  background: #7E685A;
+}
+
+.expense-display ul li .col-4 .btn-delete {
+  background: #E7717D;
+  color: white;
+}
+
+.expense-display ul li .col-4 .btn-delete:hover {
+  background: #C3073F;
+}
+
+i {
+  display: inline-block;
+  text-align: center;
+  width: 50px;
+  opacity: .9;
+}
+
+/*Add new expense button*/
+.btn-add {
+  background: RGBA(40,167,69,.7);
+  border: none;
+}
+
+.btn-add:hover {
+  background: RGBA(40,167,69,1);
+}

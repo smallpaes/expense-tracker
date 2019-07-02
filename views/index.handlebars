@@ -1,65 +1,74 @@
-<section class="container mt-4 border">
+<section class="expense-container mt-5 position-relative">
   <!--Filter Panel-->
-  <div class="row">
-    <div class="col-8 border">
+  <div class="row mx-2">
+    <div class="col-8 px-0">
       <form action="/search" method="post">
         <div class="form-row">
           <!--Month Filter-->
           <div class="dropdown col-6">
-            <a href="#" class="btn btn-secondary dropdown-toggle btn-block" role="button" id="monthDropdown"
-              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a href="#" class="btn filter-btn dropdown-toggle btn-block rounded-0 shadow font-weight-bold "
+              role="button" id="monthDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               月份
             </a>
             <div class="dropdown-menu" aria-labelledby="monthDropdown">
-              <input type="submit" value="七月份" class="dropdown-item" name="month">
-              <input type="submit" value="六月份" class="dropdown-item" name="month">
-              <input type="submit" value="六月份" class="dropdown-item" name="month">
+              <input type="submit" value="七月份" class="dropdown-item text-secondary" name="month">
+              <input type="submit" value="六月份" class="dropdown-item text-secondary" name="month">
+              <input type="submit" value="六月份" class="dropdown-item text-secondary" name="month">
             </div>
           </div>
           <!--Category Filter-->
           <div class="dropdown col-6">
-            <a href="#" class="btn btn-secondary dropdown-toggle btn-block" role="button" id="categoryDropdown"
-              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a href="#" class="btn filter-btn dropdown-toggle btn-block rounded-0 shadow font-weight-bold "
+              role="button" id="categoryDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               類別
             </a>
             <div class="dropdown-menu" aria-labelledby="categoryDropdown">
-              <input type="submit" value="家居物業" class="dropdown-item" name="category">
-              <input type="submit" value="交通出行" class="dropdown-item" name="category">
-              <input type="submit" value="休閒娛樂" class="dropdown-item" name="category">
-              <input type="submit" value="餐飲食品" class="dropdown-item" name="category">
-              <input type="submit" value="其他" class="dropdown-item" name="category">
+              <input type="submit" value="家居物業" class="dropdown-item text-secondary" name="category">
+              <input type="submit" value="交通出行" class="dropdown-item text-secondary" name="category">
+              <input type="submit" value="休閒娛樂" class="dropdown-item text-secondary" name="category">
+              <input type="submit" value="餐飲食品" class="dropdown-item text-secondary" name="category">
+              <input type="submit" value="其他" class="dropdown-item text-secondary" name="category">
             </div>
           </div>
         </div>
       </form>
     </div>
   </div>
-  <!--Total Expense Display-->
-  <div class="row">
-    <div class="col-8 border position-relative">
-      <h5>總金額：</h5>
-      <h1 class="display-4 text-right">25260</h1>
+  <!--Display Panel-->
+  <section class="display-panel shadow-lg">
+    <!--Total Expense Display-->
+    <div class="row mx-2 py-2">
+      <div class="col-8 rounded position-relative pt-2 amount-display">
+        <h4 class="pt-1">總金額：</h4>
+        <h1 class="text-right amount">25260</h1>
+      </div>
     </div>
-  </div>
-  <!--Expense Detail Display-->
-  <div class="row">
-    <ul class="list-group p-0 w-100">
-      {{#each records}}
-      <li class="list-group-item d-flex py-2 px-0">
-        <div class="col-8 border d-flex align-items-center">
-          <h1 class="d-inline-block border m-0 text-info">{{#getIcon this.category}}{{/getIcon}}</h1>
-          <div class="flex-grow-1 ml-2 text-secondary">
-            <h4 class="m-0 pb-1">{{this.name}}</h4>
-            <small class="d-block">{{this.date}}</small>
+    <!--Expense Detail Display-->
+    <div class="row mx-2 expense-display">
+      <ul class="list-group p-0 w-100">
+        {{#each records}}
+        <li class="list-group-item d-flex p-0 border-0">
+          <div class="col-8 d-flex align-items-center py-2 rounded">
+            <h1 class="d-inline-block m-0 text-info">{{#getIcon this.category}}{{/getIcon}}</h1>
+            <div class="flex-grow-1 ml-2 text-secondary">
+              <h4 class="m-0 pb-1">{{this.name}}</h4>
+              <small class="d-block">{{this.date}}</small>
+            </div>
+            <h5 class="d-inline-block m-0 text-secondary">{{this.amount}}</h5>
           </div>
-          <h5 class="d-inline-block m-0 text-secondary">{{this.amount}}</h5>
-        </div>
-        <div class="col-4 border d-flex justify-content-end align-items-center">
-          <a href="/expenses/edit/{{this._id}}" class="btn btn-info">修改</a>
-          <a href="/expenses/delete/{{this.id}}" class="btn btn-danger ml-2">刪除</a>
-        </div>
-      </li>
-      {{/each}}
-    </ul>
-  </div>
+          <div class="col-4 d-flex justify-content-end align-items-center py-2 rounded">
+            <a href="/expenses/edit/{{this._id}}" class="btn btn-edit">修改</a>
+            <a href="/expenses/delete/{{this.id}}" class="btn btn-delete ml-2">刪除</a>
+          </div>
+        </li>
+        {{/each}}
+      </ul>
+    </div>
+    <!--Add new expense button-->
+    <div class="row mt-2 mx-2 pb-2">
+      <div class="col-8 text-center">
+        <a href="/expenses/new" class="btn btn-success px-5 btn-add">新增支出</a>
+      </div>
+    </div>
+  </section>
 </section>

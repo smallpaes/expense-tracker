@@ -8,6 +8,8 @@
   <title>Expense Tracker</title>
   <link rel="stylesheet" href="/stylesheets/bootstrap.css">
   <link rel="stylesheet" href="/stylesheets/css/all.css">
+  <link href="https://fonts.googleapis.com/css?family=Poppins:400,500,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/stylesheets/main.css">
   {{#if indexCSS}}
   <link rel="stylesheet" href="/stylesheets/index.css">
   {{/if}}
@@ -16,7 +18,8 @@
   {{/if}}
 </head>
 
-<body>
+<body class="position-relative">
+  <div class="overlay"></div>
   <nav class="navbar navbar-dark bg-dark">
     <a href="/" class="navbar-brand">家庭記帳本</a>
     <a href="/users/logout" class="nav-link btn btn-outline-light">登出</a>
