@@ -55,8 +55,8 @@
           <h5 class="d-inline-block m-0 text-secondary">{{this.amount}}</h5>
         </div>
         <div class="col-4 border d-flex justify-content-end align-items-center">
-          <a href="/expenses/edit/id" class="btn btn-info">修改</a>
-          <a href="/expenses/edit/id" class="btn btn-danger ml-2">刪除</a>
+          <a href="/expenses/edit/{{this._id}}" class="btn btn-info">修改</a>
+          <a href="/expenses/delete/{{this.id}}" class="btn btn-danger ml-2">刪除</a>
         </div>
       </li>
       {{/each}}

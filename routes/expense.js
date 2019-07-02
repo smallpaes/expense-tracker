@@ -5,7 +5,7 @@ const Record = require('../models/record')
 
 // Create new expense page
 router.get('/new', (req, res) => {
-  res.render('new', { newCSS: true })
+  res.render('form', { formCSS: true })
 })
 
 // Create new expanse submit

@@ -7,7 +7,7 @@ router.get('/', (req, res) => {
   // retrieve all expense from record collection
   Record.find()
     .then(records => {
-      console.log(records)
+      console.log(records[0]._id)
       res.render('index', { indexCSS: true, records })
     })
     .catch(err => console.log(err))
