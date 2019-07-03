@@ -1,0 +1,67 @@
+<div class="form-container position-relative shadow">
+  <form action="{{#if registerMode}}/users/register{{else}}/users/login{{/if}}" method="post" class="needs-validation"
+    novalidate>
+    <div class="row mb-4">
+      <div class="col-2 ml-2">
+        <small class="text-danger pl-2">*必填</small>
+      </div>
+      <div class="col-8">
+        <h4 class="text-center font-weight-bold">註冊</h4>
+      </div>
+    </div>
+    <!--Display error message-->
+    {{> error-message}}
+    <div class="form-group row ml-1 mr-4">
+      <label for="name" class="col-3 col-form-label text-right">註冊名稱*</label>
+      <input type="text" name="name" id="name" class="col-9 form-control" value="{{record.name}}" required>
+      <div class="valid-feedback">
+        格式正確！
+      </div>
+      <div class="invalid-feedback">
+        名稱必填！
+      </div>
+    </div>
+    <div class="form-group row ml-1 mr-4">
+      <label for="email" class="col-3 col-form-label text-right">電子信箱*</label>
+      <input type="email" name="email" id="email" class="col-9 form-control" value="{{record.email}}" required>
+      <div class="valid-feedback">
+        格式正確！
+      </div>
+      <div class="invalid-feedback">
+        電子信箱必填！
+      </div>
+    </div>
+    <div class="form-group row ml-1 mr-4">
+      <label for="password" class="col-3 col-form-label text-right">登入密碼*</label>
+      <input type="password" name="password" id="password" class="col-9 form-control" value="{{record.password}}"
+        required>
+      <div class="valid-feedback">
+        格式正確！
+      </div>
+      <div class="invalid-feedback">
+        密碼必填！
+      </div>
+    </div>
+    <div class="form-group row ml-1 mr-4">
+      <label for="re-password" class="col-3 col-form-label text-right">確認密碼*</label>
+      <input type="password" name="re-password" id="re-password" class="col-9 form-control"
+        value="{{record.re-password}}" required>
+      <div class="valid-feedback">
+        格式正確！
+      </div>
+      <div class="invalid-feedback">
+        密碼必填！
+      </div>
+    </div>
+    <div class="row ml-1 mr-4">
+      <div class="col-3"></div>
+      <div class="col-9 p-0 mt-1">
+        {{#if registerMode}}
+        <input type="submit" value="註冊" class="btn btn-info btn-block">
+        {{else}}
+        <input type="submit" value="登入" class="btn btn-info btn-block">
+        {{/if}}
+      </div>
+    </div>
+  </form>
+</div>

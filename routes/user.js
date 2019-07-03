@@ -3,7 +3,11 @@ const router = express.Router()
 
 // signup page
 router.get('/register', (req, res) => {
-  res.send('signup page')
+  res.render('user', {
+    formCSS: true,
+    formValidateJS: true,
+    registerMode: true
+  })
 })
 
 // signup submit page
@@ -13,7 +17,11 @@ router.post('/register', (req, res) => {
 
 // login page
 router.get('/login', (req, res) => {
-  res.send('login page')
+  res.render('user', {
+    formCSS: true,
+    formValidateJS: true,
+    registerMode: false
+  })
 })
 
 // login submit page
