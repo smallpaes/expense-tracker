@@ -2,6 +2,8 @@ const express = require('express')
 const router = express.Router()
 const User = require('../models/user')
 const Record = require('../models/record')
+// Include check package from express-validator
+const { body, validationResult } = require('express-validator')
 
 // Create new expense page
 router.get('/new', (req, res) => {
@@ -9,11 +11,51 @@ router.get('/new', (req, res) => {
 })
 
 // Create new expanse submit
-router.post('/new', (req, res) => {
+router.post('/new', [
+  // name is requires
+  body('name')
+    .trim()
+    .isLength({ min: 1 })
+    .withMessage('名字必填，且不能是空格'),
+  // date is require is in date format
+  body('date')
+    .custom(value => {
+      const regex = /^\d{4}-\d{2}-\d{2}$/
+      if (!value.match(regex)) {
+        throw new Error('輸入的日期格式錯誤')
+      }
+      // return true if input pass the validation
+      return true
+    }),
+  body('category')
+    .custom(value => {
+      if (!['家居物業', '交通出行', '休閒娛樂', '餐飲食品', '其他'].includes(value)) {
+        console.log('error')
+        throw new Error('請選擇一個類別')
+      }
+      return true
+    }),
+  // amount is required, and should be a positive integer
+  body('amount')
+    .trim()
+    .isInt({ min: 1 })
+    .withMessage('金額必填')
+], (req, res) => {
   console.log(req.body)
-
   // retrieve input data
   const { name, date, category, amount } = req.body
+
+  // Find all validation errors in the req in a object
+  const errors = validationResult(req)
+  console.log(errors.array())
+  if (!errors.isEmpty()) {
+    return res.status(422).render('form', {
+      formCSS: true,
+      record: { name, date, category, amount },
+      formValidateJS: true,
+      errorMessages: errors.array()
+    })
+  }
 
   //create new document in record collection
   const newRecord = new Record({
@@ -35,7 +77,7 @@ router.get('/edit/:id', (req, res) => {
   // find the document based on id 
   Record.findById(req.params.id)
     .then(record => {
-      res.render('form', { formCSS: true, record, formValidateJS: true })
+      res.render('form', { formCSS: true, record, formValidateJS: true, isEditMode: true })
     })
     .catch(err => console.log(err))
 
