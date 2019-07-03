@@ -30,7 +30,6 @@ router.post('/new', [
   body('category')
     .custom(value => {
       if (!['家居物業', '交通出行', '休閒娛樂', '餐飲食品', '其他'].includes(value)) {
-        console.log('error')
         throw new Error('請選擇一個類別')
       }
       return true
@@ -41,13 +40,10 @@ router.post('/new', [
     .isInt({ min: 1 })
     .withMessage('必填一個大於零的金額')
 ], (req, res) => {
-  console.log(req.body)
   // retrieve input data
   const { name, date, category, amount } = req.body
-
   // Find all validation errors in the req in a object
   const errors = validationResult(req)
-  console.log(errors.array())
   if (!errors.isEmpty()) {
     return res.status(422).render('form', {
       formCSS: true,
@@ -103,7 +99,6 @@ router.put('/edit/:id', [
   body('category')
     .custom(value => {
       if (!['家居物業', '交通出行', '休閒娛樂', '餐飲食品', '其他'].includes(value)) {
-        console.log('error')
         throw new Error('請選擇一個類別')
       }
       return true
@@ -118,7 +113,6 @@ router.put('/edit/:id', [
   const { name, date, category, amount } = req.body
   // Find all validation errors in the req in a object
   const errors = validationResult(req)
-  console.log(errors.array())
   if (!errors.isEmpty()) {
     return res.status(422).render('form', {
       formCSS: true,
