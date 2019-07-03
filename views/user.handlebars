@@ -11,48 +11,54 @@
     </div>
     <!--Display error message-->
     {{> error-message}}
-    <div class="form-group row ml-1 mr-4">
+    <!--From input-->
+    {{#if registerMode}}
+    <div class="form-group row ml-1 mr-4 justify-content-end">
       <label for="name" class="col-3 col-form-label text-right">註冊名稱*</label>
-      <input type="text" name="name" id="name" class="col-9 form-control" value="{{record.name}}" required>
-      <div class="valid-feedback">
+      <input type="text" name="name" id="name" class="col-9 form-control" value="{{user.name}}" required>
+      <div class="valid-feedback col-9 p-0">
         格式正確！
       </div>
-      <div class="invalid-feedback">
+      <div class="invalid-feedback col-9 p-0">
         名稱必填！
       </div>
     </div>
-    <div class="form-group row ml-1 mr-4">
+    {{/if}}
+    <div class="form-group row ml-1 mr-4 justify-content-end">
       <label for="email" class="col-3 col-form-label text-right">電子信箱*</label>
-      <input type="email" name="email" id="email" class="col-9 form-control" value="{{record.email}}" required>
-      <div class="valid-feedback">
+      <input type="email" name="email" id="email" class="col-9 form-control" value="{{user.email}}"
+        pattern="^\S+@\w+\.\w+$" required>
+      <div class="valid-feedback col-9 p-0">
         格式正確！
       </div>
-      <div class="invalid-feedback">
-        電子信箱必填！
+      <div class="invalid-feedback col-9 p-0">
+        電子信箱必填，格式須為：xx@xx.xx
       </div>
     </div>
-    <div class="form-group row ml-1 mr-4">
+    <div class="form-group row ml-1 mr-4 justify-content-end">
       <label for="password" class="col-3 col-form-label text-right">登入密碼*</label>
-      <input type="password" name="password" id="password" class="col-9 form-control" value="{{record.password}}"
+      <input type="password" name="password" id="password" class="col-9 form-control" value="{{user.password}}"
         required>
-      <div class="valid-feedback">
+      <div class="valid-feedback col-9 p-0">
         格式正確！
       </div>
-      <div class="invalid-feedback">
+      <div class="invalid-feedback col-9 p-0">
         密碼必填！
       </div>
     </div>
-    <div class="form-group row ml-1 mr-4">
-      <label for="re-password" class="col-3 col-form-label text-right">確認密碼*</label>
-      <input type="password" name="re-password" id="re-password" class="col-9 form-control"
-        value="{{record.re-password}}" required>
-      <div class="valid-feedback">
+    {{#if registerMode}}
+    <div class="form-group row ml-1 mr-4 justify-content-end">
+      <label for="rePassword" class="col-3 col-form-label text-right">確認密碼*</label>
+      <input type="password" name="rePassword" id="rePassword" class="col-9 form-control" value="{{user.re-password}}"
+        required>
+      <div class="valid-feedback col-9 p-0">
         格式正確！
       </div>
-      <div class="invalid-feedback">
+      <div class="invalid-feedback col-9 p-0">
         密碼必填！
       </div>
     </div>
+    {{/if}}
     <div class="row ml-1 mr-4">
       <div class="col-3"></div>
       <div class="col-9 p-0 mt-1">
