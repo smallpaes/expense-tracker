@@ -39,7 +39,7 @@ router.post('/new', [
   body('amount')
     .trim()
     .isInt({ min: 1 })
-    .withMessage('金額必填')
+    .withMessage('必填一個大於零的金額')
 ], (req, res) => {
   console.log(req.body)
   // retrieve input data
@@ -84,9 +84,50 @@ router.get('/edit/:id', (req, res) => {
 })
 
 // Edit expense submit
-router.put('/edit/:id', (req, res) => {
+router.put('/edit/:id', [
+  // name is requires
+  body('name')
+    .trim()
+    .isLength({ min: 1 })
+    .withMessage('名字必填，且不能是空格'),
+  // date is require is in date format
+  body('date')
+    .custom(value => {
+      const regex = /^\d{4}-\d{2}-\d{2}$/
+      if (!value.match(regex)) {
+        throw new Error('輸入的日期格式錯誤')
+      }
+      // return true if input pass the validation
+      return true
+    }),
+  body('category')
+    .custom(value => {
+      if (!['家居物業', '交通出行', '休閒娛樂', '餐飲食品', '其他'].includes(value)) {
+        console.log('error')
+        throw new Error('請選擇一個類別')
+      }
+      return true
+    }),
+  // amount is required, and should be a positive integer
+  body('amount')
+    .trim()
+    .isInt({ min: 1 })
+    .withMessage('必填一個大於零的金額')
+], (req, res) => {
   // get all data from data input
   const { name, date, category, amount } = req.body
+  // Find all validation errors in the req in a object
+  const errors = validationResult(req)
+  console.log(errors.array())
+  if (!errors.isEmpty()) {
+    return res.status(422).render('form', {
+      formCSS: true,
+      record: { name, date, category, amount, _id: req.params.id },
+      formValidateJS: true,
+      isEditMode: true,
+      errorMessages: errors.array()
+    })
+  }
   // find the document based on id
   Record.findById(req.params.id)
     .then(record => {
