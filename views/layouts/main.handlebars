@@ -22,7 +22,11 @@
   <div class="overlay"></div>
   <nav class="navbar navbar-dark bg-dark">
     <a href="/" class="navbar-brand">家庭記帳本</a>
+    {{#if user}}
     <a href="/users/logout" class="nav-link btn btn-outline-light">登出</a>
+    {{else}}
+    <a href="/users/login" class="nav-link btn btn-outline-light">登入</a>
+    {{/if}}
   </nav>
 
   {{{ body }}}

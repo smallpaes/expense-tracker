@@ -62,6 +62,13 @@ app.use(passport.session())
 // include passport config
 require('./config/passport')(passport)
 
+// Set response local level variables to use in views during that cycle
+app.use((req, res, next) => {
+  // safe user info 
+  res.locals.user = req.user
+  next()
+})
+
 // use method-override to override using a query value
 app.use(methodOverride('_method'))
 
