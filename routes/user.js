@@ -83,7 +83,10 @@ router.post('/login', passport.authenticate('local', {
 
 // logout page
 router.get('/logout', (req, res) => {
-  res.send('logout page')
+  // remove req.user property and clear login session
+  req.logout()
+  // redirect back to login page
+  res.redirect('/users/login')
 })
 
 
