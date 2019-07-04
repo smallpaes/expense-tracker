@@ -1,9 +1,14 @@
 const express = require('express')
 const router = express.Router()
+// Include authentication middleware
+const isAuthenticated = require('../config/auth')
+
+// Include models
 const Record = require('../models/record')
 const User = require('../models/user')
 
-router.get('/', (req, res) => {
+
+router.get('/', isAuthenticated, (req, res) => {
   // retrieve all expense from record collection
   Record.find({})
     .sort({ date: 'desc' })

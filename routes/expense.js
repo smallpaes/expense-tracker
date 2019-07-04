@@ -4,6 +4,8 @@ const User = require('../models/user')
 const Record = require('../models/record')
 // Include check package from express-validator
 const { body, validationResult } = require('express-validator')
+// Include authentication middleware
+const isAuthenticated = require('../config/auth')
 
 // Create new expense page
 router.get('/new', (req, res) => {
@@ -11,7 +13,7 @@ router.get('/new', (req, res) => {
 })
 
 // Create new expanse submit
-router.post('/new', [
+router.post('/new', isAuthenticated, [
   // name is requires
   body('name')
     .trim()
@@ -69,7 +71,7 @@ router.post('/new', [
 })
 
 // Edit expense page
-router.get('/edit/:id', (req, res) => {
+router.get('/edit/:id', isAuthenticated, (req, res) => {
   // find the document based on id 
   Record.findById(req.params.id)
     .then(record => {
@@ -80,7 +82,7 @@ router.get('/edit/:id', (req, res) => {
 })
 
 // Edit expense submit
-router.put('/edit/:id', [
+router.put('/edit/:id', isAuthenticated, [
   // name is requires
   body('name')
     .trim()
@@ -140,7 +142,7 @@ router.put('/edit/:id', [
 })
 
 // Delete expense 
-router.delete('/delete/:id', (req, res) => {
+router.delete('/delete/:id', isAuthenticated, (req, res) => {
   // find the document based on id
   Record.findById(req.params.id)
     .then(record => {
