@@ -55,13 +55,13 @@ router.post('/new', isAuthenticated, [
       errorMessages: errors.array()
     })
   }
-
-  //create new document in record collection
+  // form passed validation: create new document in record collection
   const newRecord = new Record({
     name: name,
     category: category,
     date: date,
-    amount: amount
+    amount: amount,
+    userId: req.user._id
   })
 
   // save the document to record collection
@@ -74,12 +74,11 @@ router.post('/new', isAuthenticated, [
 // Edit expense page
 router.get('/edit/:id', isAuthenticated, (req, res) => {
   // find the document based on id 
-  Record.findById(req.params.id)
+  Record.findOne({ _id: req.params.id, userId: req.user._id })
     .then(record => {
       res.render('form', { formCSS: true, record, formValidateJS: true, isEditMode: true })
     })
     .catch(err => console.log(err))
-
 })
 
 // Edit expense submit
@@ -126,7 +125,7 @@ router.put('/edit/:id', isAuthenticated, [
     })
   }
   // find the document based on id
-  Record.findById(req.params.id)
+  Record.findOne({ _id: req.params.id, userId: req.user._id })
     .then(record => {
       // update document info based on form input
       record.name = name
@@ -145,7 +144,7 @@ router.put('/edit/:id', isAuthenticated, [
 // Delete expense 
 router.delete('/delete/:id', isAuthenticated, (req, res) => {
   // find the document based on id
-  Record.findById(req.params.id)
+  Record.findOne({ _id: req.params.id, userId: req.user._id })
     .then(record => {
       record.remove((err, record) => {
         if (err) return console.log(err)

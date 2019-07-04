@@ -10,7 +10,7 @@
       </div>
     </div>
     <!--Display error message-->
-    {{> error-message}}
+    {{> message}}
     <div class="form-group row ml-1 mr-4">
       <label for="name" class="col-2 col-form-label">名稱*</label>
       <input type="text" name="name" id="name" class="col-10 form-control" value="{{record.name}}" required>
@@ -39,7 +39,7 @@
         <option value="交通出行" {{isSelected record.category "交通出行"}}>交通出行</option>
         <option value="休閒娛樂" {{isSelected record.category "休閒娛樂"}}>休閒娛樂</option>
         <option value="餐飲食品" {{isSelected record.category "餐飲食品"}}>餐飲食品</option>
-        <option value="其他12" {{isSelected record.category "其他"}}>其他</option>
+        <option value="其他" {{isSelected record.category "其他"}}>其他</option>
       </select>
       <div class="valid-feedback">
         格式正確！

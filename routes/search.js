@@ -18,7 +18,7 @@ router.get('/', isAuthenticated, (req, res) => {
   const months = []
 
   // find all record
-  Record.find({})
+  Record.find({ userId: req.user._id })
     .then(records => {
       // find total month
       records.forEach(record => {
@@ -28,7 +28,8 @@ router.get('/', isAuthenticated, (req, res) => {
       return Record.find({
         $and: [
           categoryCriteria,
-          dateCriteria
+          dateCriteria,
+          { userId: req.user._id }
         ]
       })
     })

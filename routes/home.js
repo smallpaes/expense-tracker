@@ -9,9 +9,8 @@ const User = require('../models/user')
 
 
 router.get('/', isAuthenticated, (req, res) => {
-  console.log(req.user)
   // retrieve all expense from record collection
-  Record.find({})
+  Record.find({ userId: req.user._id })
     .sort({ date: 'desc' })
     .exec((err, records) => {
       if (err) return console.log(err)
