@@ -2,6 +2,7 @@
 const passport = require('passport')
 const mongoose = require('mongoose')
 const LocalStorage = require('passport-local').Strategy
+const bcrypt = require('bcryptjs')
 
 // Include models
 const User = require('../models/user')
@@ -19,9 +20,12 @@ module.exports = passport => {
         // no such user
         if (!user) { return done(null, false, { message: 'Email 輸入錯誤' }) }
         // has such user, but with incorrect password
-        if (user.password !== password) { return done(null, false, { message: '密碼錯誤' }) }
-        // has such user and passed authentication, supply Passport with user
-        return done(null, user)
+        bcrypt.compare(password, user.password, (err, isMatch) => {
+          // password correct
+          if (isMatch) { return done(null, user) }
+          // password incorrect
+          return done(null, false, { message: '密碼錯誤' })
+        })
       })
     }
   ))

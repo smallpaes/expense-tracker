@@ -6,7 +6,11 @@
         <small class="text-danger pl-2">*必填</small>
       </div>
       <div class="col-8">
+        {{#if registerMode}}
         <h4 class="text-center font-weight-bold">註冊</h4>
+        {{else}}
+        <h4 class="text-center font-weight-bold">登入</h4>
+        {{/if}}
       </div>
     </div>
     <!--Display error message-->

@@ -3,6 +3,7 @@ const router = express.Router()
 const User = require('../models/user')
 const { body, validationResult } = require('express-validator')
 const passport = require('passport')
+const bcrypt = require('bcryptjs')
 
 // signup page
 router.get('/register', (req, res) => {
@@ -55,15 +56,21 @@ router.post('/register', [
     })
   }
   // if data pass front-end & back-end validation
-  User.create({
-    name: name,
-    email: email,
-    password: password
-  })
-    .then(user => {
-      res.redirect('/')
+  bcrypt.genSalt(10, (err, salt) => {
+    bcrypt.hash(password, salt, (err, hash) => {
+      if (err) { return console.log(err) }
+      // store user into database
+      User.create({
+        name: name,
+        email: email,
+        password: hash
+      })
+        .then(user => {
+          res.redirect('/')
+        })
+        .catch(err => console.log(err))
     })
-    .catch(err => console.log(err))
+  })
 })
 
 // login page
