@@ -55,22 +55,29 @@ router.post('/register', [
       user: { name, email, password, rePassword }
     })
   }
-  // if data pass front-end & back-end validation
-  bcrypt.genSalt(10, (err, salt) => {
-    bcrypt.hash(password, salt, (err, hash) => {
-      if (err) { return console.log(err) }
-      // store user into database
-      User.create({
-        name: name,
-        email: email,
-        password: hash
-      })
-        .then(user => {
-          res.redirect('/')
+  // Check if this is an existing email, after passing validation
+  User.findOne({ email: email })
+    .then(user => {
+      // an existing email
+      if (user) { return res.redirect('/users/login') }
+      // new user email
+      bcrypt.genSalt(10, (err, salt) => {
+        bcrypt.hash(password, salt, (err, hash) => {
+          if (err) { return console.log(err) }
+          // store user into database
+          User.create({
+            name: name,
+            email: email,
+            password: hash
+          })
+            .then(user => {
+              res.redirect('/')
+            })
+            .catch(err => console.log(err))
         })
-        .catch(err => console.log(err))
+      })
     })
-  })
+    .catch(err => console.log(err))
 })
 
 // login page
