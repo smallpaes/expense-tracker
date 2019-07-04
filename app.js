@@ -74,6 +74,8 @@ app.use((req, res, next) => {
   res.locals.reminder = req.flash('reminder')
   // error message
   res.locals.error = req.flash('error')
+  // success message
+  res.locals.success = req.flash('success')
   next()
 })
 

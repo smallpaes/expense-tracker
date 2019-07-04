@@ -103,6 +103,8 @@ router.post('/login', passport.authenticate('local', {
 router.get('/logout', (req, res) => {
   // remove req.user property and clear login session
   req.logout()
+  // show logout success message
+  req.flash('success', '你己經成功登出')
   // redirect back to login page
   res.redirect('/users/login')
 })
