@@ -6,6 +6,8 @@ const exphbs = require('express-handlebars')
 const bodyParser = require('body-parser')
 const handlebarHelpers = require('./handlebars-helpers')
 const methodOverride = require('method-override')
+const session = require('express-session')
+const passport = require('passport')
 
 // Set up express-handlebars
 app.engine('handlebars', exphbs({ default: 'main' }))
@@ -43,6 +45,22 @@ const Record = require('./models/record')
 
 // add middle-parser middleware
 app.use(bodyParser.urlencoded({ extended: true }))
+
+// set up session
+app.use(session({
+  secret: 'joifhjoweifoikwenfokerjnofmweakmndlew',
+  resave: false,
+  saveUninitialized: false
+}))
+
+// Initialize Passport
+app.use(passport.initialize())
+
+// use persistent login sessions
+app.use(passport.session())
+
+// include passport config
+require('./config/passport')(passport)
 
 // use method-override to override using a query value
 app.use(methodOverride('_method'))
