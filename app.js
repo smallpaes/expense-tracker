@@ -8,6 +8,7 @@ const handlebarHelpers = require('./handlebars-helpers')
 const methodOverride = require('method-override')
 const session = require('express-session')
 const passport = require('passport')
+const flash = require('connect-flash')
 
 // Set up express-handlebars
 app.engine('handlebars', exphbs({ default: 'main' }))
@@ -53,6 +54,9 @@ app.use(session({
   saveUninitialized: false
 }))
 
+// use flash middleware
+app.use(flash())
+
 // Initialize Passport
 app.use(passport.initialize())
 
@@ -66,6 +70,10 @@ require('./config/passport')(passport)
 app.use((req, res, next) => {
   // safe user info 
   res.locals.user = req.user
+  // reminder message
+  res.locals.reminder = req.flash('reminder')
+  // error message
+  res.locals.error = req.flash('error')
   next()
 })
 

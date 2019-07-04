@@ -11,20 +11,22 @@ module.exports = passport => {
   // Configure strategy using use() function
   passport.use(new LocalStorage({
     // ask LocalStrategy to find username in parameter named email
-    usernameField: 'email'
+    usernameField: 'email',
+    // also pass req to verify callback
+    passReqToCallback: true
   },
     // set up a verify call back to accept credentials
-    function (username, password, done) {
+    function (req, username, password, done) {
       User.findOne({ email: username }, (err, user) => {
         if (err) { return done(err) }
         // no such user
-        if (!user) { return done(null, false, { message: 'Email 輸入錯誤' }) }
+        if (!user) { return done(null, false, req.flash('error', 'Email 輸入錯誤')) }
         // has such user, but with incorrect password
         bcrypt.compare(password, user.password, (err, isMatch) => {
           // password correct
           if (isMatch) { return done(null, user) }
           // password incorrect
-          return done(null, false, { message: '密碼錯誤' })
+          return done(null, false, req.flash('error', '密碼輸入錯誤'))
         })
       })
     }

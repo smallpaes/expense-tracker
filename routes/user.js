@@ -59,7 +59,10 @@ router.post('/register', [
   User.findOne({ email: email })
     .then(user => {
       // an existing email
-      if (user) { return res.redirect('/users/login') }
+      if (user) {
+        req.flash('reminder', '帳號已註冊過，請直接登入')
+        return res.redirect('/users/login')
+      }
       // new user email
       bcrypt.genSalt(10, (err, salt) => {
         bcrypt.hash(password, salt, (err, hash) => {
@@ -92,7 +95,8 @@ router.get('/login', (req, res) => {
 // login submit page
 router.post('/login', passport.authenticate('local', {
   successRedirect: '/',
-  failureRedirect: '/users/login'
+  failureRedirect: '/users/login',
+  failureFlash: true
 }))
 
 // logout page
