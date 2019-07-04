@@ -9,6 +9,7 @@ const User = require('../models/user')
 
 
 router.get('/', isAuthenticated, (req, res) => {
+  console.log(req.user)
   // retrieve all expense from record collection
   Record.find({})
     .sort({ date: 'desc' })

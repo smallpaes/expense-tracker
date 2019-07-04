@@ -8,7 +8,8 @@ const { body, validationResult } = require('express-validator')
 const isAuthenticated = require('../config/auth')
 
 // Create new expense page
-router.get('/new', (req, res) => {
+router.get('/new', isAuthenticated, (req, res) => {
+  console.log(req.user)
   res.render('form', { formCSS: true, formValidateJS: true })
 })
 

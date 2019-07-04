@@ -1,8 +1,10 @@
 const express = require('express')
 const router = express.Router()
+// Include authentication middleware
+const isAuthenticated = require('../config/auth')
 const Record = require('../models/record')
 
-router.get('/', (req, res) => {
+router.get('/', isAuthenticated, (req, res) => {
 
   const { month, category, defaultCategory, defaultMonth } = req.query
   const selectedMonth = month ? month
