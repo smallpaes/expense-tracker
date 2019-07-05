@@ -18,7 +18,7 @@ router.get('/', isAuthenticated, (req, res) => {
   const months = []
 
   // find all record
-  Record.find({ userId: req.user._id })
+  Record.find({ userId: req.user._id }, null, { sort: { date: 'desc' } })
     .then(records => {
       // find total month
       records.forEach(record => {
@@ -32,6 +32,7 @@ router.get('/', isAuthenticated, (req, res) => {
           { userId: req.user._id }
         ]
       })
+        .sort({ date: 'desc' })
     })
     .then(records => {
       // find total expense
