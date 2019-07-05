@@ -10,6 +10,9 @@ const session = require('express-session')
 const passport = require('passport')
 const flash = require('connect-flash')
 
+// Include controllers
+const errorController = require('./controllers/error')
+
 // Set up express-handlebars
 app.engine('handlebars', exphbs({ default: 'main' }))
 app.set('view engine', 'handlebars')
@@ -98,9 +101,7 @@ app.use('/search', searchRoutes)
 app.use('/users', userRoutes)
 
 // error page
-app.use((req, res) => {
-  res.send('page not found')
-})
+app.use(errorController.getError)
 
 // Start and listen to server
 app.listen(port, () => {

@@ -11,27 +11,27 @@
     </div>
     <!--Display error message-->
     {{> message}}
-    <div class="form-group row ml-1 mr-4">
-      <label for="name" class="col-2 col-form-label">名稱*</label>
+    <div class="form-group row ml-1 mr-4 justify-content-end">
+      <label for="name" class="col-2 col-form-label ">名稱*</label>
       <input type="text" name="name" id="name" class="col-10 form-control" value="{{record.name}}" required>
-      <div class="valid-feedback">
+      <div class="valid-feedback col-10 p-0">
         格式正確！
       </div>
-      <div class="invalid-feedback">
+      <div class="invalid-feedback col-10 p-0">
         名稱必填！
       </div>
     </div>
-    <div class="form-group row ml-1 mr-4">
+    <div class="form-group row ml-1 mr-4 justify-content-end">
       <label for="date" class="col-2 col-form-label">日期*</label>
       <input type="date" name="date" id="date" class="col-10 form-control" value="{{record.date}}" required>
-      <div class="valid-feedback">
+      <div class="valid-feedback col-10 p-0">
         格式正確！
       </div>
-      <div class="invalid-feedback">
+      <div class="invalid-feedback col-10 p-0">
         日期必須選擇！
       </div>
     </div>
-    <div class="form-group row ml-1 mr-4">
+    <div class="form-group row ml-1 mr-4 justify-content-end">
       <label for="category" class="col-2 col-form-label">類別*</label>
       <select name="category" id="category" class="col-10 custom-select text-secondary" required>
         <option value="" selected>類別選擇</option>
@@ -41,21 +41,21 @@
         <option value="餐飲食品" {{isSelected record.category "餐飲食品"}}>餐飲食品</option>
         <option value="其他" {{isSelected record.category "其他"}}>其他</option>
       </select>
-      <div class="valid-feedback">
+      <div class="valid-feedback col-10 p-0">
         格式正確！
       </div>
-      <div class="invalid-feedback">
+      <div class="invalid-feedback col-10 p-0">
         類別必須選一個！
       </div>
     </div>
-    <div class="form-group row ml-1 mr-4">
+    <div class="form-group row ml-1 mr-4 justify-content-end">
       <label for="amount" class="col-2 col-form-label">金額*</label>
       <input type="number" name="amount" id="amount" class="col-10 form-control" value="{{record.amount}}" min="0"
         required>
-      <div class="valid-feedback">
+      <div class="valid-feedback col-10 p-0">
         格式正確！
       </div>
-      <div class="invalid-feedback">
+      <div class="invalid-feedback col-10 p-0">
         金額必填，且不能是負值！
       </div>
     </div>
