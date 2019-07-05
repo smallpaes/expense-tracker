@@ -5,6 +5,15 @@ const passport = require('passport')
 const bcrypt = require('bcryptjs')
 // Nodejs built-it crypto to help create unique random value for token
 const crypto = require('crypto')
+const nodemailer = require('nodemailer')
+const sendgridTransport = require('nodemailer-sendgrid-transport')
+
+// set up transporter to tell nodemailer how email will be delivered
+const transporter = nodemailer.createTransport(sendgridTransport({
+  auth: {
+    api_key: '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'
+  }
+}))
 
 module.exports = {
   getRegister: (req, res) => {
@@ -46,7 +55,16 @@ module.exports = {
               password: hash
             })
               .then(user => {
-                res.redirect('/')
+                res.redirect('/users/login')
+                return transporter.sendMail({
+                  to: email,
+                  from: 'expense-tracker@example.com',
+                  subject: '註冊成功',
+                  html: `
+                  <p>${name}, 你已經註冊成功</p>
+                  <a href="http://localhost:3000/">點我前往家庭記帳本</a>
+                  `
+                })
               })
               .catch(err => console.log(err))
           })

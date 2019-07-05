@@ -54,7 +54,7 @@ router.get('/logout', userController.getLogout)
 router.get('/reset', userController.getReset)
 
 // reset password submit
-router.post('/reset', userController.postReset)
+// router.post('/reset', userController.postReset)
 
 module.exports = router
 
