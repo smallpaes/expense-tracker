@@ -1,0 +1,14 @@
+{
+  "users": [
+    {
+      "name": "老爸",
+      "email": "user1@example.com",
+      "password": "12345678"
+    },
+    {
+      "name": "老嗎",
+      "email": "user2@example.com",
+      "password": "12345678"
+    }
+  ]
+}
