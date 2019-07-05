@@ -61,8 +61,8 @@ module.exports = {
                   from: 'expense-tracker@example.com',
                   subject: '註冊成功',
                   html: `
-                  <p>${name}, 你已經註冊成功</p>
-                  <a href="http://localhost:3000/">點我前往家庭記帳本</a>
+                    <p>${name}, 你已經註冊成功</p>
+                    <a href="http://localhost:3000/">點我前往家庭記帳本</a>
                   `
                 })
               })
@@ -113,8 +113,67 @@ module.exports = {
           user.resetTokenExpiration = Date.now() + 3600000
           // save info to database
           user.save()
+            .then(user => {
+              // redirect back to login page
+              res.redirect('/users/login')
+              // send a reset email to user with unique token as params
+              transporter.sendMail({
+                to: req.body.email,
+                from: 'expense-tracker@example.com',
+                subject: '重設密碼',
+                html: `
+                  <p>${user.name} 您好,</p>
+                  <p>點擊<a href="http://localhost:3000/users/reset/${token}">此連結</a>重設密碼</p>
+                `
+              })
+            })
         })
         .catch(err => console.log(err))
     })
+  },
+  getNewPassword: (req, res) => {
+    // get token embed in the URL
+    const token = req.params.token
+    // find the user in the database
+    User.findOne({ resetToken: token, resetTokenExpiration: { $gt: Date.now() } })
+      .then(user => {
+        res.render('new-password', {
+          formCSS: true,
+          formValidateJS: true,
+          userId: user._id,
+          passwordToken: token
+        })
+      })
+      .catch(err => console.log(err))
+  },
+  postNewPassword: (req, res) => {
+    const { password, userId, passwordToken } = req.body
+    // get all validation error message in an object
+    const errors = validationResult(req)
+    // if any error message prompted, show warning message
+    if (!errors.isEmpty()) {
+      return res.status(422).render('new-password', {
+        formCSS: true,
+        formValidateJS: true,
+        userId: user._id,
+        passwordToken: token
+      })
+    }
+    // form passed validation
+    User.findOne({ resetToken: passwordToken, resetTokenExpiration: { $gt: Date.now() }, _id: userId })
+      .then(user => {
+        // hash new password
+        bcrypt.genSalt(10, (err, salt) => {
+          bcrypt.hash(password, salt, (err, hash) => {
+            if (err) console.log(err)
+            user.password = hash
+            user.resetToken = null
+            user.resetTokenExpiration = null
+            user.save()
+              .then(res.redirect('/users/login'))
+          })
+        })
+      })
+      .catch(err => console.log(err))
   }
 }

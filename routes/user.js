@@ -50,11 +50,32 @@ router.post('/login', passport.authenticate('local', {
 // logout page
 router.get('/logout', userController.getLogout)
 
-// reset password page
+// reset password page: send email
 router.get('/reset', userController.getReset)
 
-// reset password submit
-// router.post('/reset', userController.postReset)
+// reset password submit: send email
+router.post('/reset', userController.postRest)
+
+// reset password page: from email link
+router.get('/reset/:token', userController.getNewPassword)
+
+// reset password submit: from email link
+router.post('/new-password', [
+  // password is required
+  body('password')
+    .trim()
+    .isLength({ min: 1 })
+    .withMessage('密碼必填'),
+  // re-password is required and should match the first input
+  body('rePassword')
+    .trim()
+    .custom((value, { req }) => {
+      if (value !== req.body.password) {
+        throw new Error('兩次輸入的密碼不相同')
+      }
+      return true
+    })
+], userController.postNewPassword)
 
 module.exports = router
 
