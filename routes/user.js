@@ -50,6 +50,11 @@ router.post('/login', passport.authenticate('local', {
 // logout page
 router.get('/logout', userController.getLogout)
 
+// reset password page
+router.get('/reset', userController.getReset)
+
+// reset password submit
+router.post('/reset', userController.postReset)
 
 module.exports = router
 

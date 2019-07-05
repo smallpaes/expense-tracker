@@ -9,6 +9,10 @@ const methodOverride = require('method-override')
 const session = require('express-session')
 const passport = require('passport')
 const flash = require('connect-flash')
+const csrf = require('csurf')
+
+// Initialize csrf protection middleware
+const csrfProtection = csrf()
 
 // Include controllers
 const errorController = require('./controllers/error')
@@ -57,6 +61,9 @@ app.use(session({
   saveUninitialized: false
 }))
 
+// use csrf protection middleware after session
+app.use(csrfProtection)
+
 // use flash middleware
 app.use(flash())
 
@@ -79,6 +86,8 @@ app.use((req, res, next) => {
   res.locals.error = req.flash('error')
   // success message
   res.locals.success = req.flash('success')
+  // generate one CSRF token to each render page
+  res.locals.csrfToken = req.csrfToken()
   next()
 })
 

@@ -3,13 +3,14 @@ const User = require('../models/user')
 const { validationResult } = require('express-validator')
 const passport = require('passport')
 const bcrypt = require('bcryptjs')
+// Nodejs built-it crypto to help create unique random value for token
+const crypto = require('crypto')
 
 module.exports = {
   getRegister: (req, res) => {
-    res.render('user', {
+    res.render('register', {
       formCSS: true,
-      formValidateJS: true,
-      registerMode: true
+      formValidateJS: true
     })
   },
   postRegister: (req, res) => {
@@ -19,10 +20,9 @@ module.exports = {
     const errors = validationResult(req)
     // if any error message prompted, show warning message
     if (!errors.isEmpty()) {
-      return res.status(422).render('user', {
+      return res.status(422).render('register', {
         formCSS: true,
         formValidateJS: true,
-        registerMode: true,
         errorMessages: errors.array(),
         user: { name, email, password, rePassword }
       })
@@ -55,10 +55,9 @@ module.exports = {
       .catch(err => console.log(err))
   },
   getLogin: (req, res) => {
-    res.render('user', {
+    res.render('login', {
       formCSS: true,
-      formValidateJS: true,
-      registerMode: false
+      formValidateJS: true
     })
   },
   getLogout: (req, res) => {
@@ -68,5 +67,36 @@ module.exports = {
     req.flash('success', '你己經成功登出')
     // redirect back to login page
     res.redirect('/users/login')
+  },
+  getReset: (req, res) => {
+    res.render('reset', {
+      formCSS: true,
+      formValidateJS: true,
+    })
+  },
+  postRest: (req, res) => {
+    crypto.randomBytes(32, (err, buffer) => {
+      if (err) {
+        console.log(err)
+        return res.redirect('/')
+      }
+      const token = buffer.toString('hex')
+      // store token on the user planning to reset
+      User.findOne({ email: req.body.email })
+        .then(user => {
+          // no user found
+          if (!user) {
+            req.flash('error', '此 Email 未註冊過')
+            return res.redirect('/users/reset')
+          }
+          // user is found, add token
+          user.resetToken = token
+          // token expired in an hour
+          user.resetTokenExpiration = Date.now() + 3600000
+          // save info to database
+          user.save()
+        })
+        .catch(err => console.log(err))
+    })
   }
 }

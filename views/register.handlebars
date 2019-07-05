@@ -1,22 +1,17 @@
 <div class="form-container position-relative shadow">
-  <form action="{{#if registerMode}}/users/register{{else}}/users/login{{/if}}" method="post" class="needs-validation"
-    novalidate>
+  <form action="/users/register" method="post" class="needs-validation" novalidate>
+    <input type="hidden" name="_csrf" value="{{csrfToken}}">
     <div class="row mb-4">
       <div class="col-2 ml-2">
         <small class="text-danger pl-2">*必填</small>
       </div>
       <div class="col-8">
-        {{#if registerMode}}
         <h4 class="text-center font-weight-bold">註冊</h4>
-        {{else}}
-        <h4 class="text-center font-weight-bold">登入</h4>
-        {{/if}}
       </div>
     </div>
     <!--Display error message-->
     {{> message}}
     <!--From input-->
-    {{#if registerMode}}
     <div class="form-group row ml-1 mr-4 justify-content-end">
       <label for="name" class="col-3 col-form-label text-right">註冊名稱*</label>
       <input type="text" name="name" id="name" class="col-9 form-control" value="{{user.name}}" required>
@@ -27,7 +22,6 @@
         名稱必填！
       </div>
     </div>
-    {{/if}}
     <div class="form-group row ml-1 mr-4 justify-content-end">
       <label for="email" class="col-3 col-form-label text-right">電子信箱*</label>
       <input type="email" name="email" id="email" class="col-9 form-control" value="{{user.email}}"
@@ -50,7 +44,6 @@
         密碼必填！
       </div>
     </div>
-    {{#if registerMode}}
     <div class="form-group row ml-1 mr-4 justify-content-end">
       <label for="rePassword" class="col-3 col-form-label text-right">確認密碼*</label>
       <input type="password" name="rePassword" id="rePassword" class="col-9 form-control" value="{{user.re-password}}"
@@ -62,15 +55,10 @@
         密碼必填！
       </div>
     </div>
-    {{/if}}
     <div class="row ml-1 mr-4">
       <div class="col-3"></div>
       <div class="col-9 p-0 mt-1">
-        {{#if registerMode}}
         <input type="submit" value="註冊" class="btn btn-info btn-block">
-        {{else}}
-        <input type="submit" value="登入" class="btn btn-info btn-block">
-        {{/if}}
       </div>
     </div>
   </form>

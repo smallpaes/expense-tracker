@@ -1,6 +1,7 @@
 <div class="form-container position-relative shadow">
   <form action="{{#if isEditMode}}/expenses/edit/{{record._id}}?_method=PUT{{else}}/expenses/new{{/if}}" method="post"
     class="needs-validation" novalidate>
+    <input type="hidden" name="_csrf" value="{{csrfToken}}">
     <div class="row mb-4">
       <div class="col-2 ml-2">
         <small class="text-danger pl-2">*必填</small>
