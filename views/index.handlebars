@@ -9,7 +9,7 @@
             <input value="{{selectedMonth}}" type="hidden" name="defaultMonth">
             <a href="#" class="btn filter-btn dropdown-toggle btn-block rounded-0 shadow font-weight-bold "
               role="button" id="monthDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              月份
+              {{#if selectedMonth}}selectedMonth{{else}}月份{{/if}}
             </a>
             <div class="dropdown-menu" aria-labelledby="monthDropdown">
               {{#each months}}
