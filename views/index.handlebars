@@ -9,7 +9,7 @@
             <input value="{{selectedMonth}}" type="hidden" name="defaultMonth">
             <a href="#" class="btn filter-btn dropdown-toggle btn-block rounded-0 shadow font-weight-bold "
               role="button" id="monthDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              {{#if selectedMonth}}selectedMonth{{else}}月份{{/if}}
+              {{#if selectedMonth}}{{selectedMonth}}{{else}}月份{{/if}}
             </a>
             <div class="dropdown-menu" aria-labelledby="monthDropdown">
               {{#each months}}
@@ -22,7 +22,7 @@
             <input value="{{selectedCategory}}" type="hidden" name="defaultCategory">
             <a href="#" class="btn filter-btn dropdown-toggle btn-block rounded-0 shadow font-weight-bold "
               role="button" id="categoryDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              類別
+              {{#if selectedCategory}}{{selectedCategory}}{{else}}類別{{/if}}
             </a>
             <div class="dropdown-menu" aria-labelledby="categoryDropdown">
               <input type="submit" value="家居物業" class="dropdown-item text-secondary" name="category">
