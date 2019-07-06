@@ -21,14 +21,9 @@ router.post('/new', isAuthenticated, [
     .withMessage('名字必填，且不能是空格'),
   // date is require is in date format
   body('date')
-    .custom(value => {
-      const regex = /^\d{4}-\d{2}-\d{2}$/
-      if (!value.match(regex)) {
-        throw new Error('輸入的日期格式錯誤')
-      }
-      // return true if input pass the validation
-      return true
-    }),
+    .isISO8601()
+    .isAfter('2000-01-01')
+    .withMessage('輸入的日期格式錯誤'),
   body('category')
     .custom(value => {
       if (!['家居物業', '交通出行', '休閒娛樂', '餐飲食品', '其他'].includes(value)) {
@@ -55,14 +50,9 @@ router.put('/edit/:id', isAuthenticated, [
     .withMessage('名字必填，且不能是空格'),
   // date is require is in date format
   body('date')
-    .custom(value => {
-      const regex = /^\d{4}-\d{2}-\d{2}$/
-      if (!value.match(regex)) {
-        throw new Error('輸入的日期格式錯誤')
-      }
-      // return true if input pass the validation
-      return true
-    }),
+    .isISO8601()
+    .isAfter('2000-01-01')
+    .withMessage('輸入的日期格式錯誤'),
   body('category')
     .custom(value => {
       if (!['家居物業', '交通出行', '休閒娛樂', '餐飲食品', '其他'].includes(value)) {

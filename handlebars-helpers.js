@@ -11,3 +11,8 @@ Handlebars.registerHelper('getIcon', function (category, options) {
 Handlebars.registerHelper('isSelected', function (selectedOption, thisOption, options) {
   return (selectedOption === thisOption) ? 'selected' : ''
 })
+
+Handlebars.registerHelper('getFormattedDate', function (date, options) {
+  const month = date.getMonth() === 11 ? 1 : date.getMonth() + 1
+  return `${date.getFullYear()}/${month}/${date.getDate()}`
+})

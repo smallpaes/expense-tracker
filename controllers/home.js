@@ -1,5 +1,6 @@
 // Include models
 const Record = require('../models/record')
+const { getFormatedMonth } = require('../date-process')
 
 module.exports = {
   getHome: (req, res) => {
@@ -13,8 +14,9 @@ module.exports = {
         // find total month
         const months = []
         records.forEach(record => {
-          if (months.includes(record.date.slice(0, 7))) { return }
-          months.push(record.date.slice(0, 7))
+          const displayDate = getFormatedMonth(record)
+          if (months.includes(displayDate)) { return }
+          months.push(displayDate)
         })
         res.render('index', { indexCSS: true, records, totalAmount, months })
       })

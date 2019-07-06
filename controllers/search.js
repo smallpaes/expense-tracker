@@ -1,9 +1,10 @@
 // Include models
 const Record = require('../models/record')
+const { getDateCriteria, getFormatedMonth } = require('../date-process')
 
 module.exports = {
   getSearchExpense: (req, res) => {
-
+    // keep filtered options
     const { month, category, defaultCategory, defaultMonth } = req.query
     const selectedMonth = month ? month
       : defaultMonth ? defaultMonth
@@ -12,21 +13,22 @@ module.exports = {
       : defaultCategory ? defaultCategory
         : null
     const categoryCriteria = selectedCategory ? { category: selectedCategory } : {}
-    const dateCriteria = selectedMonth ? { date: { $regex: selectedMonth, $options: 'i' } } : {}
+    const dateCriteria = getDateCriteria(selectedMonth)
     const months = []
 
     // find all record
     Record.find({ userId: req.user._id }, null, { sort: { date: 'desc' } })
       .then(records => {
-        // find total month
+        // find month options for filter
         records.forEach(record => {
-          if (months.includes(record.date.slice(0, 7))) { return }
-          months.push(record.date.slice(0, 7))
+          const displayDate = getFormatedMonth(record)
+          if (months.includes(displayDate)) { return }
+          months.push(displayDate)
         })
         return Record.find({
           $and: [
-            categoryCriteria,
             dateCriteria,
+            categoryCriteria,
             { userId: req.user._id }
           ]
         })

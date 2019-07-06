@@ -10,6 +10,7 @@ module.exports = {
   postNewExpense: (req, res) => {
     // retrieve input data
     const { name, date, category, amount } = req.body
+    console.log(date)
     // Find all validation errors in the req in a object
     const errors = validationResult(req)
     if (!errors.isEmpty()) {
@@ -28,7 +29,6 @@ module.exports = {
       amount: amount,
       userId: req.user._id
     })
-
     // save the document to record collection
     newRecord.save((err, expense) => {
       if (err) return console.log(err)
