@@ -10,6 +10,8 @@ const session = require('express-session')
 const passport = require('passport')
 const flash = require('connect-flash')
 const csrf = require('csurf')
+// check if it's in production mode
+if (process.env.NODE_ENV !== 'production') { require('dotenv').config() }
 
 // Initialize csrf protection middleware
 const csrfProtection = csrf()

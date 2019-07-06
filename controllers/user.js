@@ -11,7 +11,7 @@ const sendgridTransport = require('nodemailer-sendgrid-transport')
 // set up transporter to tell nodemailer how email will be delivered
 const transporter = nodemailer.createTransport(sendgridTransport({
   auth: {
-    api_key: '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'
+    api_key: process.env.SENDGRID_KEY
   }
 }))
 
