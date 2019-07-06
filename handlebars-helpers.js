@@ -12,7 +12,12 @@ Handlebars.registerHelper('isSelected', function (selectedOption, thisOption, op
   return (selectedOption === thisOption) ? 'selected' : ''
 })
 
-Handlebars.registerHelper('getFormattedDate', function (date, options) {
+Handlebars.registerHelper('getDisplayDate', function (date, options) {
   const month = date.getMonth() === 11 ? 1 : date.getMonth() + 1
   return `${date.getFullYear()}/${month}/${date.getDate()}`
+})
+
+Handlebars.registerHelper('getInputDate', function (date, options) {
+  const month = date.getMonth() === 11 ? 1 : date.getMonth() + 1
+  return `${date.getFullYear()}-${month.toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`
 })
