@@ -30,7 +30,7 @@
         格式正確！
       </div>
       <div class="invalid-feedback col-10 p-0">
-        日期必須選擇！
+        日期未填或不在正常區間！
       </div>
     </div>
     <div class="form-group row ml-1 mr-4 justify-content-end">
@@ -52,7 +52,7 @@
     </div>
     <div class="form-group row ml-1 mr-4 justify-content-end">
       <label for="amount" class="col-2 col-form-label">金額*</label>
-      <input type="number" name="amount" id="amount" class="col-10 form-control" value="{{record.amount}}" min="0"
+      <input type="number" name="amount" id="amount" class="col-10 form-control" value="{{record.amount}}" min="1"
         required>
       <div class="valid-feedback col-10 p-0">
         格式正確！

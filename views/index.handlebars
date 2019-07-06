@@ -80,12 +80,12 @@
                     </button>
                   </div>
                   <div class="modal-body text-secondary">
-                    你確定要刪除「<span class="font-weight-bold">{{this.date}} {{this.name}}</span> 」這筆紀錄嗎？
+                    你確定要刪除「<span class="font-weight-bold">{{getDisplayDate this.date}} {{this.name}}</span> 」這筆紀錄嗎？
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
                     <form action="/expenses/delete/{{this.id}}?_method=DELETE" method="post">
-                      <input type="hidden" name="_csrf" value="{{csrfToken}}">
+                      <input type="hidden" name="_csrf" value="{{../csrfToken}}">
                       <input type="submit" value="刪除" class="btn btn-danger">
                     </form>
                   </div>

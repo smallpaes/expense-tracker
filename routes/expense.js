@@ -24,7 +24,7 @@ router.post('/new', isAuthenticated, [
     .isISO8601()
     .isAfter('2000-01-01')
     .isBefore('2030-01-01')
-    .withMessage('輸入的日期格式錯誤'),
+    .withMessage('日期未填或不在正常區間'),
   body('category')
     .custom(value => {
       if (!['家居物業', '交通出行', '休閒娛樂', '餐飲食品', '其他'].includes(value)) {
@@ -53,7 +53,8 @@ router.put('/edit/:id', isAuthenticated, [
   body('date')
     .isISO8601()
     .isAfter('2000-01-01')
-    .withMessage('輸入的日期格式錯誤'),
+    .isBefore('2030-01-01')
+    .withMessage('日期未填或不在正常區間'),
   body('category')
     .custom(value => {
       if (!['家居物業', '交通出行', '休閒娛樂', '餐飲食品', '其他'].includes(value)) {
