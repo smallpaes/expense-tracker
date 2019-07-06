@@ -23,6 +23,7 @@ router.post('/new', isAuthenticated, [
   body('date')
     .isISO8601()
     .isAfter('2000-01-01')
+    .isBefore('2030-01-01')
     .withMessage('輸入的日期格式錯誤'),
   body('category')
     .custom(value => {

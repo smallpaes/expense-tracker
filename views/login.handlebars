@@ -26,12 +26,12 @@
     <div class="form-group row ml-1 mr-4 justify-content-end">
       <label for="password" class="col-3 col-form-label text-right">登入密碼*</label>
       <input type="password" name="password" id="password" class="col-9 form-control" value="{{user.password}}"
-        required>
+        pattern="^\S{8,12}$" required>
       <div class="valid-feedback col-9 p-0">
         格式正確！
       </div>
       <div class="invalid-feedback col-9 p-0">
-        密碼必填！
+        密碼是 8-12 位不含空白的數字、符號、英文字母！
       </div>
     </div>
     <div class="row ml-1 mr-4 mt-0 justify-content-end">

@@ -23,12 +23,15 @@ router.post('/register', [
     .withMessage('電子信箱必填，格式須為：xx@xx.xx'),
   // password is required
   body('password')
-    .trim()
-    .isLength({ min: 1 })
-    .withMessage('密碼必填'),
+    .custom((value) => {
+      const regex = /^\S{8,12}$/
+      if (!value.match(regex)) {
+        throw new Error('密碼是 8-12 位不含空白的數字、符號、英文字母')
+      }
+      return true
+    }),
   // re-password is required and should match the first input
   body('rePassword')
-    .trim()
     .custom((value, { req }) => {
       if (value !== req.body.password) {
         throw new Error('兩次輸入的密碼不相同')
@@ -63,9 +66,13 @@ router.get('/reset/:token', userController.getNewPassword)
 router.post('/new-password', [
   // password is required
   body('password')
-    .trim()
-    .isLength({ min: 1 })
-    .withMessage('密碼必填'),
+    .custom((value) => {
+      const regex = /^\S{8,12}$/
+      if (!value.match(regex)) {
+        throw new Error('密碼是 8-12 位不含空白的數字、符號、英文字母')
+      }
+      return true
+    }),
   // re-password is required and should match the first input
   body('rePassword')
     .trim()
