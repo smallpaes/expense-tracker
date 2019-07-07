@@ -9,6 +9,7 @@ A practical web application built with Node.js, Express, and MongoDB for you to 
 
 **To enhance security**
 + [csurf](https://www.npmjs.com/package/csurf) is used to prevent CSRF Attacks 
++ [express-validator](https://www.npmjs.com/package/express-validator) is used for server side validation
 + Utilizing token during password reset process 
 
 ___
