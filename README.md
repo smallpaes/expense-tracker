@@ -5,6 +5,7 @@ A practical web application built with Node.js, Express, and MongoDB for you to 
 ### Trial in this project 🤠
 **To increase user experience**
 + [Nodemailer](https://www.npmjs.com/package/nodemailer) is used to send email
++ [Chart.js](https://www.chartjs.org/) is used to visualize data in beautiful chart
 
 
 **To enhance security**
