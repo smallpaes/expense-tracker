@@ -1,5 +1,5 @@
 # Expense Tracker 💰
-A practical web application built with Node.js, Express, and MongoDB for you to readily record, view, and manage your expense with an account: : Create, view, edit, delete, filter expenses are as easy as pie 🥧
+A practical web application built with Node.js, Express, and MongoDB for you to readily record, view, and manage your expense with an account: Create, view, edit, delete, filter expenses are as easy as pie 🥧
 
 
 ### Trial in this project 🤠
