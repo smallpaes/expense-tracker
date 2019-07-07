@@ -56,58 +56,58 @@ $ git clone https://github.com/smallpaes/expense-tracker.git
 
 ### Setup
 
-1. Create an SendGrid account at [https://signup.sendgrid.com/](https://signup.sendgrid.com/)
+**1. Create an SendGrid account at [https://signup.sendgrid.com/](https://signup.sendgrid.com/)**
 
-2. Create and get a SendGrid API Key
+**2. Create and get a SendGrid API Key**
 
 ```
 Dashboard -> Settings -> API Keys -> Create API Key
 ```
 
-3. Enter the project folder
+**3. Enter the project folder**
 
 ```
 $ cd expense-tracker
 ```
 
-4. Install npm packages
+**4. Install npm packages**
 
 ```
 $ npm install
 ```
 
-5. Create .env file
+**5. Create .env file**
 
 ```
 $ touch .env
 ```
 
-6. Store API Key in .env file and save
+**6. Store API Key in .env file and save**
 
 ```
 SENDGRID_KEY=<YOUR_API_KEY>
 ```
 
-7. Import user and expense seeds
+**7. Import user and expense seeds**
 
 ```
 $ npm run seeder
 ```
 
-8. Find the message for successful import
+**8. Find the message for successful import**
 
 ```
 > db connected!
 > User and record seeds are created
 ```
 
-9. Activate the server 
+**9. Activate the server**
 
 ```
 $ npm run dev
 ```
 
-10. Find the message for successful activation
+**10. Find the message for successful activation**
 
 ```
 > Express is listening on http://localhost:3000
