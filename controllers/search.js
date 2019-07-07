@@ -35,11 +35,13 @@ module.exports = {
           .sort({ date: 'desc' })
       })
       .then(records => {
+        // check if any record is found
+        const isEmptyRecord = records.length ? false : true
         // find total expense
         const totalAmount = records.reduce((acc, cur) => acc + cur.amount, 0)
         // get chart data
         const chartData = getChartData(records)
-        res.render('index', { indexCSS: true, records, totalAmount, selectedCategory, selectedMonth, months, chartData, showChart: true })
+        res.render('index', { indexCSS: true, records, totalAmount, selectedCategory, selectedMonth, months, chartData, showChart: true, isEmptyRecord })
       })
   }
 }

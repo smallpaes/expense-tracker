@@ -54,6 +54,13 @@
     <!--Expense Detail Display-->
     <div class="row mx-2 expense-display">
       <ul class="list-group p-0 w-100">
+        {{#if isEmptyRecord}}
+        <li
+          class="list-group-item d-flex flex-column p-0 justify-content-center align-items-center border-0 h-100 text-secondary empty-message">
+          <h1 class="display-3"><i class="fas fa-smile-wink"></i></h1>
+          <h3>沒有花錢紀錄</h3>
+        </li>
+        {{/if}}
         {{#each records}}
         <li class="list-group-item d-flex p-0 border-0">
           <div class="col-8 d-flex align-items-center py-2 rounded">

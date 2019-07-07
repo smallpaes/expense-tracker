@@ -55,6 +55,10 @@ section.display-panel {
   overflow-y: scroll;
 }
 
+.expense-display li.empty-message {
+  background: #E8E8E8;
+}
+
 .expense-display ul li:first-of-type {
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
