@@ -16,6 +16,7 @@ ___
 ## Project First Look
 ![Application Screen Shot in GIF](expense-tracker.gif)
 
+
 ## Features
 | Functions              | Detail                                            | URL                         |
 | :--------------------: | ------------------------------------------------- | --------------------------- |
@@ -31,6 +32,7 @@ ___
 | Filter expenses | 1. User can filter expenses based on month and category after login | /search |
 | Page not found | User can get an error message when travelling to a page not existing | /:any_other_URL |
 
+___
 
 ## Installation
 The following instructions will get you a copy of the project and all the setting needed to run it on your local machine.
