@@ -1,6 +1,6 @@
 // Include models
 const Record = require('../models/record')
-const { getDateCriteria, getFormatedMonth } = require('../date-process')
+const { getDateCriteria, getFormatedMonth, getChartData } = require('../date-process')
 
 module.exports = {
   getSearchExpense: (req, res) => {
@@ -37,7 +37,9 @@ module.exports = {
       .then(records => {
         // find total expense
         const totalAmount = records.reduce((acc, cur) => acc + cur.amount, 0)
-        res.render('index', { indexCSS: true, records, totalAmount, selectedCategory, selectedMonth, months })
+        // get chart data
+        const chartData = getChartData(records)
+        res.render('index', { indexCSS: true, records, totalAmount, selectedCategory, selectedMonth, months, chartData, showChart: true })
       })
   }
 }

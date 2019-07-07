@@ -44,6 +44,12 @@
         <h4 class="pt-1">總金額：</h4>
         <h1 class="text-right amount">{{totalAmount}}</h1>
       </div>
+      <div class="col-4 pr-0">
+        <div class="chart-display d-flex flex-column justify-content-center pr-2">
+          <p class="p-0 m-0 text-center chart-title font-weight-bold">各項支出</p>
+          <canvas id="total-amount-chart" class="position-relative"></canvas>
+        </div>
+      </div>
     </div>
     <!--Expense Detail Display-->
     <div class="row mx-2 expense-display">

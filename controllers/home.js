@@ -1,6 +1,6 @@
 // Include models
 const Record = require('../models/record')
-const { getFormatedMonth } = require('../date-process')
+const { getFormatedMonth, getChartData } = require('../date-process')
 
 module.exports = {
   getHome: (req, res) => {
@@ -11,6 +11,8 @@ module.exports = {
         if (err) return console.log(err)
         // find total expense
         const totalAmount = records.reduce((acc, cur) => acc + cur.amount, 0)
+        // get chart data
+        const chartData = getChartData(records)
         // find total month
         const months = []
         records.forEach(record => {
@@ -18,7 +20,7 @@ module.exports = {
           if (months.includes(displayDate)) { return }
           months.push(displayDate)
         })
-        res.render('index', { indexCSS: true, records, totalAmount, months })
+        res.render('index', { indexCSS: true, records, totalAmount, months, chartData, showChart: true })
       })
   }
 }
