@@ -17,8 +17,8 @@ router.post('/new', isAuthenticated, [
   // name is requires
   body('name')
     .trim()
-    .isLength({ min: 1 })
-    .withMessage('名字必填，且不能是空格'),
+    .isLength({ min: 1, max: 8 })
+    .withMessage('名字必填，且至多八個字！'),
   // date is require is in date format
   body('date')
     .isISO8601()
@@ -35,8 +35,8 @@ router.post('/new', isAuthenticated, [
   // amount is required, and should be a positive integer
   body('amount')
     .trim()
-    .isInt({ min: 1 })
-    .withMessage('必填一個大於零的金額')
+    .isInt({ min: 1, max: 99999 })
+    .withMessage('必填一個小於十萬的金額！')
 ], expenseController.postNewExpense)
 
 // Edit expense page
@@ -47,8 +47,8 @@ router.put('/edit/:id', isAuthenticated, [
   // name is requires
   body('name')
     .trim()
-    .isLength({ min: 1 })
-    .withMessage('名字必填，且不能是空格'),
+    .isLength({ min: 1, max: 8 })
+    .withMessage('名字必填，且至多八個字！'),
   // date is require is in date format
   body('date')
     .isISO8601()
@@ -65,8 +65,8 @@ router.put('/edit/:id', isAuthenticated, [
   // amount is required, and should be a positive integer
   body('amount')
     .trim()
-    .isInt({ min: 1 })
-    .withMessage('必填一個大於零的金額')
+    .isInt({ min: 1, max: 99999 })
+    .withMessage('必填一個小於十萬的金額！')
 ], expenseController.postEditExpense)
 
 // Delete expense 

@@ -14,12 +14,13 @@
     {{> message}}
     <div class="form-group row ml-1 mr-4 justify-content-end">
       <label for="name" class="col-2 col-form-label ">名稱*</label>
-      <input type="text" name="name" id="name" class="col-10 form-control" value="{{record.name}}" required>
+      <input type="text" name="name" id="name" class="col-10 form-control" value="{{record.name}}" maxlength="8"
+        required>
       <div class="valid-feedback col-10 p-0">
         格式正確！
       </div>
       <div class="invalid-feedback col-10 p-0">
-        名稱必填！
+        名字必填，且至多八個字！
       </div>
     </div>
     <div class="form-group row ml-1 mr-4 justify-content-end">
@@ -53,12 +54,12 @@
     <div class="form-group row ml-1 mr-4 justify-content-end">
       <label for="amount" class="col-2 col-form-label">金額*</label>
       <input type="number" name="amount" id="amount" class="col-10 form-control" value="{{record.amount}}" min="1"
-        required>
+        max="99999" required>
       <div class="valid-feedback col-10 p-0">
         格式正確！
       </div>
       <div class="invalid-feedback col-10 p-0">
-        金額必填，且不能是負值！
+        必填一個小於十萬的金額！
       </div>
     </div>
     <div class="row ml-1 mr-4">
