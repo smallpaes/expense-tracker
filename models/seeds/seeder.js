@@ -9,7 +9,7 @@ const { users: userList } = require('../../user.json')
 const { records: recordList } = require('../../record.json')
 
 // connect to mondoDB
-mongoose.connect('mongodb://127.0.0.1/expense-tracker', {
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1/expense-tracker', {
   useNewUrlParser: true, useCreateIndex: true
 })
 

@@ -33,7 +33,7 @@ const searchRoutes = require('./routes/search')
 const port = 3000
 
 // connect to MongoDB, it will return a Connection object
-mongoose.connect('mongodb://127.0.0.1/expense-tracker', {
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1/expense-tracker', {
   useNewUrlParser: true, useCreateIndex: true
 })
 
@@ -115,6 +115,6 @@ app.use('/users', userRoutes)
 app.use(errorController.getError)
 
 // Start and listen to server
-app.listen(port, () => {
+app.listen(process.env.PORT || port, () => {
   console.log(`Express is listening on http://localhost:${port}`)
 })
