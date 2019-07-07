@@ -57,13 +57,15 @@ module.exports = {
             })
               .then(user => {
                 res.redirect('/users/login')
+                // check if it is currently on deploy mode 
+                const link = process.env.PORT ? "https://boiling-beach-19178.herokuapp.com/" : "http://localhost:3000/"
                 return transporter.sendMail({
                   to: email,
                   from: 'expense-tracker@example.com',
                   subject: '註冊成功',
                   html: `
                     <p>${name}, 你已經註冊成功</p>
-                    <a href="http://localhost:3000/">點我前往家庭記帳本</a>
+                    <a href=${link}>點我前往家庭記帳本</a>
                   `
                 })
               })
@@ -117,6 +119,8 @@ module.exports = {
             .then(user => {
               // redirect back to login page
               res.redirect('/users/login')
+              // check if it is currently on deploy mode 
+              const link = process.env.PORT ? `https://boiling-beach-19178.herokuapp.com/users/reset/${token}` : `http://localhost:3000/users/reset/${token}`
               // send a reset email to user with unique token as params
               transporter.sendMail({
                 to: req.body.email,
@@ -124,7 +128,7 @@ module.exports = {
                 subject: '重設密碼',
                 html: `
                   <p>${user.name} 您好,</p>
-                  <p>點擊<a href="http://localhost:3000/users/reset/${token}">此連結</a>重設密碼</p>
+                  <p>點擊<a href=${link}>此連結</a>重設密碼</p>
                 `
               })
             })
