@@ -51,6 +51,7 @@ Clone this repository to your local machine
 $ git clone https://github.com/smallpaes/expense-tracker.git
 ```
 
+
 ### Setup
 
 1. Create an SendGrid account at [https://signup.sendgrid.com/](https://signup.sendgrid.com/)
@@ -111,6 +112,17 @@ $ npm run dev
 > mongodb connected!
 ```
 You may visit the application on browser with the URL: http://localhost:3000
+
+___
+
+
+## FAQ
+- **Why didn't I receive an email upon successful registration or password rest?**
+    - They might been marked as spam, kindly check the spam folder in your mailbox.
+
+- **Can I try this app online?**
+    - Yes, kindly visit [https://boiling-beach-19178.herokuapp.com/](https://boiling-beach-19178.herokuapp.com/)
+    
 
 ## Authors
 [Mike Huang](https://github.com/smallpaes)
