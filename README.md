@@ -8,7 +8,7 @@ A practical web application built with Node.js, Express, and MongoDB for you to 
 
 
 **To enhance security**
-+ csurf is used to prevent CSRF Attacks 
++ [csurf](https://www.npmjs.com/package/csurf) is used to prevent CSRF Attacks 
 + Utilizing token during password reset process 
 
 ___
@@ -125,6 +125,8 @@ ___
 - **Can I try this app online?**
     - Yes, kindly visit [https://boiling-beach-19178.herokuapp.com/](https://boiling-beach-19178.herokuapp.com/)
     
+
+___
 
 ## Authors
 [Mike Huang](https://github.com/smallpaes)
