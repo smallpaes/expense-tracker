@@ -4,7 +4,7 @@ A practical web application built with Node.js, Express, and MongoDB for you to 
 
 ### Trial in this project 🤠
 **To increase user experience**
-+ Nodemailer is used to send email
++ [Nodemailer](https://www.npmjs.com/package/nodemailer) is used to send email
 
 
 **To enhance security**
