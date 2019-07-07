@@ -2,12 +2,12 @@
 A practical web application built with Node.js, Express, and MongoDB for you to readily record, view, and manage your expense with an account: : Create, view, edit, delete, filter expenses are as easy as pie 🥧
 
 
-#### Trial in this project
-👉 To increase user experience
+### Trial in this project 🤠
+**To increase user experience**
 + Nodemailer is used to send email
 
 
-👉 To enhance security
+**To enhance security**
 + csurf is used to prevent CSRF Attacks 
 + Utilizing token during password reset process 
 
