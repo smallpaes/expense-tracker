@@ -13,7 +13,7 @@ module.exports = {
         const totalAmount = records.reduce((acc, cur) => acc + cur.amount, 0)
         // get chart data
         const chartData = getChartData(records)
-        // if no records found
+        // check if any record is found
         const isEmptyRecord = records.length ? false : true
         // find total month
         const months = []

@@ -1,5 +1,5 @@
 module.exports = {
   getError: (req, res) => {
-    res.send('page not found')
+    res.render('error', { errorCSS: true })
   }
 }
