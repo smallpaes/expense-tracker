@@ -28,6 +28,7 @@ const homeRoutes = require('./routes/home')
 const expenseRoutes = require('./routes/expense')
 const userRoutes = require('./routes/user')
 const searchRoutes = require('./routes/search')
+const authRoutes = require('./routes/auths')
 
 // Set up server related variable
 const port = 3000
@@ -110,6 +111,9 @@ app.use('/search', searchRoutes)
 
 // user routes
 app.use('/users', userRoutes)
+
+// auth routes
+app.use('/auth', authRoutes)
 
 // error page
 app.use(errorController.getError)

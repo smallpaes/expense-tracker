@@ -11,3 +11,17 @@
   background: #D0D0D0;
   color: #5D5C61;
 }
+
+.half-column {
+  width: 49%;
+}
+
+.facebook-btn {
+  background: #3b5998;
+  color: white;
+}
+
+.facebook-btn:hover {
+  background: #293e6a;
+  color: white;
+}
