@@ -5,13 +5,13 @@ const { getDateCriteria, getFormatedMonth, getChartData } = require('../date-pro
 module.exports = {
   getSearchExpense: (req, res) => {
     // keep filtered options
-    const { month, category, defaultCategory, defaultMonth } = req.query
-    const selectedMonth = month ? month
-      : defaultMonth ? defaultMonth
-        : null
-    const selectedCategory = category ? category
-      : defaultCategory ? defaultCategory
-        : null
+    const { month, category, defaultCategory, defaultMonth, monthReset, categoryReset } = req.query
+    const selectedMonth = (monthReset || (!month && !defaultMonth)) ? null
+      : month ? month : defaultMonth
+
+    const selectedCategory = (categoryReset || (!category && !defaultCategory)) ? null
+      : category ? category : defaultCategory
+
     const categoryCriteria = selectedCategory ? { category: selectedCategory } : {}
     const dateCriteria = getDateCriteria(selectedMonth)
     const months = []
