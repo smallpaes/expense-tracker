@@ -8,9 +8,10 @@ module.exports = {
     return { date: { $gte: new Date(selectedMonth), $lte: nextMonth } }
   },
   getFormatedMonth: record => {
-    let date = new Date(record.date)
-    date = date.toLocaleDateString('zh-TW', { year: 'numeric', month: 'numeric' })
-    return `${date.split('/')[1]}/${date.split('/')[0]}`
+    const date = new Date(record.date)
+    const year = date.getFullYear()
+    const month = date.getMonth() + 1
+    return `${year}/${month}`
   },
   getChartData: records => {
     const categories = { '家居物業': 0, '交通出行': 0, '休閒娛樂': 0, '餐飲食品': 0, '其他': 0 }

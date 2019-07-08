@@ -13,8 +13,10 @@ Handlebars.registerHelper('isSelected', function (selectedOption, thisOption, op
 })
 
 Handlebars.registerHelper('getDisplayDate', function (date, options) {
-  const month = date.getMonth() === 11 ? 1 : date.getMonth() + 1
-  return `${date.getFullYear()}/${month}/${date.getDate()}`
+  const year = date.getFullYear()
+  const month = date.getMonth() + 1
+  const day = date.getDate()
+  return `${year}/${month}/${day}`
 })
 
 Handlebars.registerHelper('getInputDate', function (date, options) {

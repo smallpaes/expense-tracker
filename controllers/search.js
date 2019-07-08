@@ -21,7 +21,7 @@ module.exports = {
       .then(records => {
         // find month options for filter
         records.forEach(record => {
-          const displayDate = getFormatedMonth(record)
+          const displayDate = getFormatedMonth(record, false)
           if (months.includes(displayDate)) { return }
           months.push(displayDate)
         })
