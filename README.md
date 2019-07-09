@@ -24,6 +24,7 @@ ___
 | :--------------------: | ------------------------------------------------- | --------------------------- |
 | Sign up for an account | 1. User can sign up an account by inputting name, email, password<br>2. User can get a warning message for invalid input format<br>3. User can be redirected to login page and receive a warning message for registered account<br>4. User can receive an email for successful registration | /users/register |
 | Log in with email | 1. User can log in using registered email<br>2. User can get a warning message for incorrect password or unregistered account | /users/login |
+| Log in with Facebook account | User can log in via Facebook with a Facebook account | /auth/facebook |
 | Reset password | 1. User can choose to reset password by providing email<br>2. User can receive an email with reset link<br>3. User can reset email by visiting reset link | /users/reset |
 | Log out | User can log out of an account | /users/logout |
 | View all expenses | 1. User can view expense detail after login<br>2. User can get an error message when no expense to display after login | / |
@@ -58,7 +59,9 @@ $ git clone https://github.com/smallpaes/expense-tracker.git
 
 ### Setup
 
-**1. Create an SendGrid account at [https://signup.sendgrid.com/](https://signup.sendgrid.com/)**
+**1. Create an SendGrid & Facebook account**
+- [https://signup.sendgrid.com/](https://signup.sendgrid.com/)
+- [https://developers.facebook.com/](https://developers.facebook.com/)
 
 **2. Create and get a SendGrid API Key**
 
@@ -66,50 +69,60 @@ $ git clone https://github.com/smallpaes/expense-tracker.git
 Dashboard -> Settings -> API Keys -> Create API Key
 ```
 
-**3. Enter the project folder**
+**3. Create an Facebook App and get the App ID & Secret**
+
+```
+My Apps -> Create App -> Scenario: Integrate Facebook Login -> Settings -> Basic
+```
+
+
+**4. Enter the project folder**
 
 ```
 $ cd expense-tracker
 ```
 
-**4. Install npm packages**
+**5. Install npm packages**
 
 ```
 $ npm install
 ```
 
-**5. Create .env file**
+**6. Create .env file**
 
 ```
 $ touch .env
 ```
 
-**6. Store API Key in .env file and save**
+**7. Store API Key in .env file and save**
 
 ```
-SENDGRID_KEY=<YOUR_API_KEY>
+SENDGRID_KEY=<YOUR_SENDGRID_API_KEY>
+FACEBOOK_ID=<YOUR_FACEBOOK_APP_ID>
+FACEBOOK_SECRET=<YOUR_FACEBOOK_APP_SECRET>
+FACEBOOK_CALLBACK=<YOUR_FACEBOOK_REDIRECT_URI>
 ```
 
-**7. Import user and expense seeds**
+**8. Import user and expense seeds**
 
 ```
 $ npm run seeder
 ```
 
-**8. Find the message for successful import**
+**9. Find the message for successful import**
 
 ```
 > db connected!
 > User and record seeds are created
 ```
 
-**9. Activate the server**
+**10. Activate the server**
 
 ```
 $ npm run dev
 ```
 
-**10. Find the message for successful activation**
+**11. Find the message for successful activation**
 
 ```
 > Express is listening on http://localhost:3000
@@ -127,6 +140,8 @@ ___
 - **Can I try this app online?**
     - Yes, kindly visit [https://boiling-beach-19178.herokuapp.com/](https://boiling-beach-19178.herokuapp.com/)
     
+- **Can I use Facebook to login online?**
+    - No, the App is currently in development mode. However, you can test the function by following the setup instructions.
 
 ___
 
