@@ -23,7 +23,7 @@ module.exports = {
       formValidateJS: true
     })
   },
-  postRegister: (req, res) => {
+  postRegister: async (req, res) => {
     // get user input
     const { name, email, password, rePassword } = req.body
     // get all validation error message in an object
@@ -37,43 +37,45 @@ module.exports = {
         user: { name, email, password, rePassword }
       })
     }
-    // Check if this is an existing email, after passing validation
-    User.findOne({ email: email })
-      .then(user => {
-        // an existing email
-        if (user) {
-          req.flash('reminder', '帳號已註冊過，請直接登入')
-          return res.redirect('/users/login')
-        }
-        // new user email
-        bcrypt.genSalt(10, (err, salt) => {
-          bcrypt.hash(password, salt, (err, hash) => {
-            if (err) { return console.log(err) }
-            // store user into database
-            User.create({
-              name: name,
-              email: email,
-              password: hash
-            })
-              .then(user => {
-                res.redirect('/users/login')
-                // check if it is currently on deploy mode 
-                const link = process.env.PORT ? "https://boiling-beach-19178.herokuapp.com/" : "http://localhost:3000/"
-                return transporter.sendMail({
-                  to: email,
-                  from: 'expense-tracker@example.com',
-                  subject: '註冊成功',
-                  html: `
-                    <p>${name}, 你已經註冊成功</p>
-                    <a href=${link}>點我前往家庭記帳本</a>
-                  `
-                })
-              })
-              .catch(err => console.log(err))
-          })
-        })
+
+    try {
+      // Check if this is an existing email, after passing validation
+      const user = await User.findOne({ email: email })
+      // an existing email
+      if (user) {
+        req.flash('reminder', '帳號已註冊過，請直接登入')
+        return res.redirect('/users/login')
+      }
+
+      // new user email
+      const salt = await bcrypt.genSalt(10)
+      const hash = await bcrypt.hash(password, salt)
+
+      // store user into database
+      await User.create({
+        name: name,
+        email: email,
+        password: hash
       })
-      .catch(err => console.log(err))
+
+      // redirect back to login page after successful signup
+      res.redirect('/users/login')
+      // check if it is currently on deploy mode 
+      const link = process.env.PORT ? "https://boiling-beach-19178.herokuapp.com/" : "http://localhost:3000/"
+      // send successful sign up email
+      await transporter.sendMail({
+        to: email,
+        from: 'expense-tracker@example.com',
+        subject: '註冊成功',
+        html: `
+          <p>${name}, 你已經註冊成功</p>
+          <a href=${link}>點我前往家庭記帳本</a>
+        `
+      })
+    } catch (err) {
+      res.redirect('/users/register')
+      console.log(err)
+    }
   },
   getLogin: (req, res) => {
     res.render('login', {
@@ -95,63 +97,66 @@ module.exports = {
       formValidateJS: true,
     })
   },
-  postRest: (req, res) => {
-    crypto.randomBytes(32, (err, buffer) => {
-      if (err) {
-        console.log(err)
-        return res.redirect('/')
-      }
+  postRest: async (req, res) => {
+    try {
+      // generate random token
+      const buffer = await crypto.randomBytes(32)
       const token = buffer.toString('hex')
+
       // store token on the user planning to reset
-      User.findOne({ email: req.body.email })
-        .then(user => {
-          // no user found
-          if (!user) {
-            req.flash('error', '此 Email 未註冊過')
-            return res.redirect('/users/reset')
-          }
-          // user is found, add token
-          user.resetToken = token
-          // token expired in an hour
-          user.resetTokenExpiration = Date.now() + 3600000
-          // save info to database
-          user.save()
-            .then(user => {
-              // redirect back to login page
-              res.redirect('/users/login')
-              // check if it is currently on deploy mode 
-              const link = process.env.PORT ? `https://boiling-beach-19178.herokuapp.com/users/reset/${token}` : `http://localhost:3000/users/reset/${token}`
-              // send a reset email to user with unique token as params
-              transporter.sendMail({
-                to: req.body.email,
-                from: 'expense-tracker@example.com',
-                subject: '重設密碼',
-                html: `
-                  <p>${user.name} 您好,</p>
-                  <p>點擊<a href=${link}>此連結</a>重設密碼</p>
-                `
-              })
-            })
-        })
-        .catch(err => console.log(err))
-    })
+      const user = await User.findOne({ email: req.body.email })
+
+      // no user found
+      if (!user) {
+        req.flash('error', '此 Email 未註冊過')
+        return res.redirect('/users/reset')
+      }
+
+      // user is found, add token
+      user.resetToken = token
+      // token expired in an hour
+      user.resetTokenExpiration = Date.now() + 3600000
+      // save token and expiration time
+      await user.save()
+      // redirect back to login page
+      res.redirect('/users/login')
+      // check if it is currently on deploy mode 
+      const link = process.env.PORT ? `https://boiling-beach-19178.herokuapp.com/users/reset/${token}` : `http://localhost:3000/users/reset/${token}`
+      // send a reset email to user with unique token as params
+      transporter.sendMail({
+        to: req.body.email,
+        from: 'expense-tracker@example.com',
+        subject: '重設密碼',
+        html: `
+          <p>${user.name} 您好,</p>
+          <p>點擊<a href=${link}>此連結</a>重設密碼</p>
+        `
+      })
+    } catch (err) {
+      res.redirect('/users/reset')
+      console.log(err)
+    }
   },
-  getNewPassword: (req, res) => {
+  getNewPassword: async (req, res) => {
     // get token embed in the URL
     const token = req.params.token
-    // find the user in the database
-    User.findOne({ resetToken: token, resetTokenExpiration: { $gt: Date.now() } })
-      .then(user => {
-        res.render('new-password', {
-          formCSS: true,
-          formValidateJS: true,
-          userId: user._id,
-          passwordToken: token
-        })
+
+    try {
+      // find the user in the database
+      const user = await User.findOne({ resetToken: token, resetTokenExpiration: { $gt: Date.now() } })
+      // render to new password set up page
+      res.render('new-password', {
+        formCSS: true,
+        formValidateJS: true,
+        userId: user._id,
+        passwordToken: token
       })
-      .catch(err => console.log(err))
+    } catch (err) {
+      res.redirect('/users/reset')
+      console.log(err)
+    }
   },
-  postNewPassword: (req, res) => {
+  postNewPassword: async (req, res) => {
     const { password, userId, passwordToken } = req.body
     // get all validation error message in an object
     const errors = validationResult(req)
@@ -164,21 +169,25 @@ module.exports = {
         passwordToken: token
       })
     }
+
     // form passed validation
-    User.findOne({ resetToken: passwordToken, resetTokenExpiration: { $gt: Date.now() }, _id: userId })
-      .then(user => {
-        // hash new password
-        bcrypt.genSalt(10, (err, salt) => {
-          bcrypt.hash(password, salt, (err, hash) => {
-            if (err) console.log(err)
-            user.password = hash
-            user.resetToken = null
-            user.resetTokenExpiration = null
-            user.save()
-              .then(res.redirect('/users/login'))
-          })
-        })
-      })
-      .catch(err => console.log(err))
+    try {
+      // find user 
+      const user = await User.findOne({ resetToken: passwordToken, resetTokenExpiration: { $gt: Date.now() }, _id: userId })
+      // hash new password
+      const salt = await bcrypt.genSalt(10)
+      const hash = await bcrypt.hash(password, salt)
+      // update password and clear token related data
+      user.password = hash
+      user.resetToken = null
+      user.resetTokenExpiration = null
+      await user.save()
+      // redirect back to login page
+      res.redirect('/users/login')
+
+    } catch (err) {
+      res.redirect('/users/reset')
+      console.log(err)
+    }
   }
 }
