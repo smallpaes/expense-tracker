@@ -13,6 +13,8 @@ A practical web application built with Node.js, Express, and MongoDB for you to 
 + [express-validator](https://www.npmjs.com/package/express-validator) is used for server side validation
 + Utilizing token during password reset process 
 
+**Async/Await**
+
 ___
 
 ## Project First Look
